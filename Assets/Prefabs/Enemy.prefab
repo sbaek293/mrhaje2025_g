@@ -158,6 +158,8 @@ MonoBehaviour:
   walkPointRange: 5
   timeBetweenAttacks: 3
   projectile: {fileID: 0}
+  attackForceForward: 0
+  attackForceUp: 0
   sightRange: 10
   attackRange: 6
   playerInSightRange: 0
@@ -174,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7d2cdcb5dca7e41bbef6193769e07d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 10
   materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   - {fileID: 2100000, guid: f591e4aea7741c54783948f327f08fa5, type: 2}

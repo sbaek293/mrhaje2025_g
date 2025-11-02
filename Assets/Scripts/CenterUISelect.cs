@@ -52,7 +52,7 @@ public class CenterUISelect : MonoBehaviour
                         break;
                     }
                 }
-                Debug.Log($"Center UI hit: {selectedUI.name}", selectedUI);
+                //Debug.Log($"Center UI hit: {selectedUI.name}", selectedUI);
 
                 if (selectedUI != null)
                 {

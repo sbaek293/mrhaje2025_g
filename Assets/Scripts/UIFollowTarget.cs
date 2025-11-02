@@ -64,7 +64,7 @@ public class UIFollowTarget : MonoBehaviour
 
         if (!onScreen)
         {
-            Debug.Log($"[UIFollowTarget] Property is unactive, target: {target.name}, screenPos: {screenPos}, onScreen: {onScreen}", this.gameObject);
+            //Debug.Log($"[UIFollowTarget] Property is unactive, target: {target.name}, screenPos: {screenPos}, onScreen: {onScreen}", this.gameObject);
         }
 
         //rect.gameObject.SetActive(onScreen);

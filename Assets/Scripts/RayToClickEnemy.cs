@@ -4,6 +4,7 @@ public class RayToClickEnemy : MonoBehaviour
 {
     public Camera mainCamera;
     public LayerMask enemyLayerMask;    //Click Object in only ENEMY layer
+    public Transform player;
 
     void Awake()
     {
@@ -13,8 +14,9 @@ public class RayToClickEnemy : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) //left click
+        if (Input.GetMouseButtonDown(0) && player.GetComponent<Player>().inCodeWorld()) //left click
         {
+            
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             //Debug.Log($"Casting ray from {mainCamera.name} at {Input.mousePosition}");
 
