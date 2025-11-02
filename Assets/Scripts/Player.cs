@@ -63,6 +63,8 @@ public class Player : MonoBehaviour
     private bool isTransitioning = false;
     private int currentWorld = 0;
 
+    public static event Action<int> OnChangeWorld;
+
 
 
     private void Start()
@@ -136,11 +138,19 @@ public class Player : MonoBehaviour
 
         bool changeWorld = Input.GetKeyDown(KeyCode.Q);
 
-        if (changeWorld && !isTransitioning)
+        if (changeWorld)
+        {
+            changeWorldFunc();
+        }
+
+    }
+
+    public void changeWorldFunc()
+    {
+        if (!isTransitioning)
         {
             if (currentWorld == 0)
             {
-
                 StartCoroutine(WarpTransition(1));
                 currentWorld = 1;
             }
@@ -150,8 +160,9 @@ public class Player : MonoBehaviour
                 StartCoroutine(WarpTransition(0));
                 currentWorld = 0;
             }
-        }
 
+            OnChangeWorld?.Invoke(currentWorld); //Invoke event
+        }
     }
 
     public void togglePause()
