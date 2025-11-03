@@ -20,11 +20,12 @@ public class Weapon : MonoBehaviour
         if (!readyToAttack || attacking) return;
 
         animator.SetBool("Attack", true);
+        AttackRaycast();
         readyToAttack = false;
         attacking = true;
         Invoke(nameof(cancelAnimation), 0.7f);
         Invoke(nameof(ResetAttack), attackSpeed);
-        Invoke(nameof(AttackRaycast), attackDelay);
+        
     }
 
     void ResetAttack()

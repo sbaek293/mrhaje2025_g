@@ -13,7 +13,10 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int amount)
     {
 
-        GetComponent<MeshRenderer>().material = materials[1];
+        MeshRenderer renderer = GetComponent<MeshRenderer>();
+        renderer.material = materials[1];
+        renderer.enabled = false;
+        renderer.enabled = true;
         Invoke("changeMaterial", 1f);
         currentHealth -= amount;
         if (currentHealth <= 0)
