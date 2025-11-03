@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour
         {
             if (hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth T))
             {   
-                T.GetComponent<MeshRenderer>().material = T.materials[1];
+                
                 T.TakeDamage(attackDamage);
                 Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
             }
