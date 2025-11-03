@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     public Look lookScript;
     public bool paused = false;
     public GameObject pauseMenu;
+    public ShaderTest shaderTest;
     [Header("SFX")] 
     public AudioClip jump;
 
@@ -156,12 +157,14 @@ public class Player : MonoBehaviour
             if (!inCodeWorld() && GetComponent<Stamina>().TrySkill())
             {
                 StartCoroutine(WarpTransition(1));
+                shaderTest.Matrixmode = true;
                 currentWorld = 1;
             }
             else if (currentWorld == 1)
             {
 
                 StartCoroutine(WarpTransition(0));
+                shaderTest.Matrixmode = false;
                 currentWorld = 0;
             }
 
@@ -192,10 +195,10 @@ public class Player : MonoBehaviour
             yield return null;
         }
 
-        for (int i = 0; i < environment.transform.childCount; i++)
-        {
-            environment.transform.GetChild(i).GetComponent<ChangeMaterial>().changeMaterial(world);
-        }
+        //for (int i = 0; i < environment.transform.childCount; i++)
+        //{
+        //    environment.transform.GetChild(i).GetComponent<ChangeMaterial>().changeMaterial(world);
+        //}
 
         elapsed = 0f;
 
