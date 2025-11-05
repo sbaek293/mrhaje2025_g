@@ -45,8 +45,12 @@ public class Player : MonoBehaviour
     public ShaderTest shaderTest;
     [Header("SFX")] 
     public AudioClip jump;
-
-
+    public AudioClip land;
+    private float landTimer = 0;
+    public List<AudioClip> defaultFootSteps;
+    public float footStepMultiplier = 2f;
+    private float footStepTimer = 0;
+    
 
     [Header("Transition")]
     public float lensStrength;
@@ -89,13 +93,6 @@ public class Player : MonoBehaviour
         //if (Camera.main) Camera.main.enabled = false;
     }
 
-    public void Awake()
-    {
-
-
-
-
-    }
 
     private void Update()
     {
@@ -123,9 +120,39 @@ public class Player : MonoBehaviour
         bool isSprinting = sprint && t_vmove > 0 && !isJumping && isGrounded;
 
 
+        //footStepFX
+        if (isGrounded&& defaultFootSteps.Count>0&& rig.linearVelocity.magnitude>0.5f)
+        {
+            
+            if (footStepTimer > footStepMultiplier/ rig.linearVelocity.magnitude)
+            {
+                footStepTimer = 0;
+                AudioManager.PlaySound(gameObject, defaultFootSteps[UnityEngine.Random.Range(0, defaultFootSteps.Count)], false, 10, 0.1f);
+            }
+            else
+            {
+                footStepTimer += Time.deltaTime;
+            }
+        }
+        //land FX
 
-
-
+        if (land)
+        {
+            if (landTimer > 0.5f&& isGrounded)
+            {
+                landTimer = 0;
+                AudioManager.PlaySound(gameObject, land, false, 10, 0.2f);
+            }
+            else if(!isGrounded)
+            {
+                landTimer += Time.deltaTime;
+            }
+            else
+            {
+                landTimer = 0;
+            }
+           
+        }
 
         //Jumping
         if (isJumping)

@@ -4,6 +4,7 @@ using System.Collections;
 public class ShaderTest : MonoBehaviour
 {
     public bool Matrixmode = false;
+    public AudioClip TransitionAudio;
     public float TransitionTime = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,6 +14,10 @@ public class ShaderTest : MonoBehaviour
 
     IEnumerator lol(bool enter)
     {
+        if (TransitionAudio)
+        {
+            AudioManager.PlaySound(gameObject, TransitionAudio);
+        }
         float timer = 0;
         while (true)
         {
