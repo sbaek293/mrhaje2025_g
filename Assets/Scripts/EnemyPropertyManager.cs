@@ -52,7 +52,7 @@ public class EnemyPropertyManager : PropertyManager
         if (follow != null)
         {
             follow.target = this.transform;
-            follow.worldOffset = new Vector3(2.0f, 2.0f, 0f);
+            follow.screenOffset = new Vector3(2.0f, 2.0f, 0f);
             follow.viewCam = mainCamera;
             follow.canvas = uiCanvas;
         }
