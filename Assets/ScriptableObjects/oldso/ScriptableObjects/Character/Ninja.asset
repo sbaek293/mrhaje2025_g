@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b28ed1fe30fc1e247961aeb97c147544, type: 3}
+  m_Name: Ninja
+  m_EditorClassIdentifier: 
+  name: Ninja
+  damage: 0.2
+  reload: 1
+  health: 0.5
+  mobility: 1
+  range: 0.5
+  color: {r: 0.2202741, g: 0.30836293, b: 0.4716981, a: 1}
+  info: {fileID: 8366272611954209670, guid: 9dcf79caa19f2354a996e6c8fc507903, type: 3}
+  cost: 2000
+  rarity: Rare

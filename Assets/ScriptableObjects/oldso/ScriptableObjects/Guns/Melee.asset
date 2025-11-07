@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a25d21a380892d4384862484da0cf75, type: 3}
+  m_Name: Melee
+  m_EditorClassIdentifier: 
+  name: Melee
+  damage: 70
+  firerate: 0.2
+  bloom: 1
+  recoil: 0
+  kickback: 0.3
+  aimSpeed: 30
+  prefab: {fileID: 1831751379316431750, guid: 26ab6a8edec44ee4b91434691173ed48, type: 3}
+  gunshotSound: {fileID: 8300000, guid: e3ba94263dc6c404eb5f17bf4f53893f, type: 3}
+  pitchRandomization: 0
+  range: 1.5
+  bulletHole: {fileID: 8678127491482015904, guid: a080834c45c7e2549939a0f9c9e9e16f,
+    type: 3}
+  burst: 0

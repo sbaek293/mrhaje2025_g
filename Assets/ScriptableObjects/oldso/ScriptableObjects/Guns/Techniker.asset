@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a25d21a380892d4384862484da0cf75, type: 3}
+  m_Name: Techniker
+  m_EditorClassIdentifier: 
+  name: Techniker
+  damage: 400
+  firerate: 2
+  bloom: 300
+  recoil: 60
+  kickback: 0.4
+  aimSpeed: 5
+  prefab: {fileID: 3990202996555074594, guid: dedf971891ca5d94b868a65b5bf7211b, type: 3}
+  gunshotSound: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
+  pitchRandomization: 0.005
+  range: 45
+  bulletHole: {fileID: 7679733713166645819, guid: 5390011af3c5c6842b1dfd01335f7b57,
+    type: 3}
+  burst: 0

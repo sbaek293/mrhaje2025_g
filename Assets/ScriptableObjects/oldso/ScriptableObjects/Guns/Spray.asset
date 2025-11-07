@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a25d21a380892d4384862484da0cf75, type: 3}
+  m_Name: Spray
+  m_EditorClassIdentifier: 
+  name: Spray
+  damage: 0
+  firerate: 10
+  bloom: 0
+  recoil: 0
+  kickback: 0
+  aimSpeed: 0
+  prefab: {fileID: 2695149959096659809, guid: 834afd150ef83fc408a3ab7df5726974, type: 3}
+  gunshotSound: {fileID: 8300000, guid: 0508ec446b1e39c4481ea6b9e5c4587e, type: 3}
+  pitchRandomization: 0
+  range: 5
+  bulletHole: {fileID: 2359044884367751165, guid: 7d5a9e9418c970244a545be581c7c6fe,
+    type: 3}
+  burst: 0

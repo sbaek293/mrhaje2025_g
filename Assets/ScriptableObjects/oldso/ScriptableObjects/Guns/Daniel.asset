@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a25d21a380892d4384862484da0cf75, type: 3}
+  m_Name: Daniel
+  m_EditorClassIdentifier: 
+  name: Daniel
+  damage: 30
+  firerate: 0.6
+  bloom: 17
+  recoil: 5
+  kickback: 0.1
+  aimSpeed: 13
+  prefab: {fileID: 566261434953268164, guid: 49e2e33371acde148a4eb29897eafcac, type: 3}
+  gunshotSound: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
+  pitchRandomization: 0.05
+  range: 1
+  bulletHole: {fileID: 1387983357175530944, guid: 850fba36a0bb07946acf0138983dc3b3,
+    type: 3}
+  burst: 0

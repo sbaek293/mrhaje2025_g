@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a25d21a380892d4384862484da0cf75, type: 3}
+  m_Name: Ninja
+  m_EditorClassIdentifier: 
+  name: Ninja
+  damage: 150
+  firerate: 0.5
+  bloom: 14
+  recoil: 1
+  kickback: 0
+  aimSpeed: 15
+  prefab: {fileID: 7472242299250844414, guid: 849b9e5375f062e499b8e5f8dcfa7a2d, type: 3}
+  gunshotSound: {fileID: 8300000, guid: 82a02398bd601ab4db743ef1c20c1842, type: 3}
+  pitchRandomization: 0.05
+  range: 15
+  bulletHole: {fileID: 6564417660584231677, guid: 73dd8dcf90a7ea5419e22e5c43431c34,
+    type: 3}
+  burst: 0

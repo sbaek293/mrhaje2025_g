@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a25d21a380892d4384862484da0cf75, type: 3}
+  m_Name: Tank
+  m_EditorClassIdentifier: 
+  name: Tank
+  damage: 300
+  firerate: 1
+  bloom: 50
+  recoil: 50
+  kickback: 0.3
+  aimSpeed: 5
+  prefab: {fileID: 2726889856902691577, guid: 408b8119dd68a664bb03cfedcb4e972f, type: 3}
+  gunshotSound: {fileID: 8300000, guid: a764377339b869e459f5e53fb9258f73, type: 3}
+  pitchRandomization: 0.05
+  range: 5
+  bulletHole: {fileID: 4937591072213588163, guid: 128470372df0ebc40ae3788668ce75b3,
+    type: 3}
+  burst: 0

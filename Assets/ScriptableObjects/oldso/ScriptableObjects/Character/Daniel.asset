@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b28ed1fe30fc1e247961aeb97c147544, type: 3}
+  m_Name: Daniel
+  m_EditorClassIdentifier: 
+  name: Daniel
+  damage: 0.5
+  reload: 0.5
+  health: 0.3
+  mobility: 0.5
+  range: 0.5
+  color: {r: 0.59375596, g: 0.046724807, b: 0.6603774, a: 1}
+  info: {fileID: 4127509831981294561, guid: 8ae7beb9296591843adb347c2c7be3a4, type: 3}
+  cost: 4000
+  rarity: Epic

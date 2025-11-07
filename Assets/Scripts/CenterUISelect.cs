@@ -62,7 +62,7 @@ public class CenterUISelect : MonoBehaviour
                         PropertyDatas prop = propClick.SteelProperty();
                         PlayerPropertyManager propManager = player.GetComponent<PlayerPropertyManager>();
                         propManager.AddProperty(prop);
-                        player.GetComponent<Player>().changeWorldFunc();
+                        player.GetComponent<ChangeWorld>().changeWorldFunc();
                     }
                 }
             }

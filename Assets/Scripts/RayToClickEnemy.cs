@@ -14,7 +14,7 @@ public class RayToClickEnemy : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && player.GetComponent<Player>().inCodeWorld()) //left click
+        if (Input.GetMouseButtonDown(0) && player.GetComponent<ChangeWorld>().inCodeWorld()) //left click
         {
             
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);

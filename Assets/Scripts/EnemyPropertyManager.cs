@@ -17,8 +17,8 @@ public class EnemyPropertyManager : PropertyManager
 
     private int currentWorld = 0;
 
-    void OnEnable() => Player.OnChangeWorld += HandleChangeWorld;
-    void OnDisable() => Player.OnChangeWorld -= HandleChangeWorld;
+    void OnEnable() => ChangeWorld.OnChangeWorld += HandleChangeWorld;
+    void OnDisable() => ChangeWorld.OnChangeWorld -= HandleChangeWorld;
 
 
     void Awake()

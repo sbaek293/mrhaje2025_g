@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b28ed1fe30fc1e247961aeb97c147544, type: 3}
+  m_Name: Pyro
+  m_EditorClassIdentifier: 
+  name: Pyro
+  damage: 0.01
+  reload: 1
+  health: 0.6
+  mobility: 0.7
+  range: 0.3
+  color: {r: 1, g: 1, b: 0.16862746, a: 1}
+  info: {fileID: 4127509831981294561, guid: 09d6062e1fca04d49b58b2bfac0f0704, type: 3}
+  cost: 2000
+  rarity: Rare
