@@ -22,12 +22,12 @@ using UnityEngine;
         {
             if (PauseScript.paused || ChangeWorld.isInMatrix) { return; }
             
-            transform.Translate(Vector3.forward*Time.deltaTime*speed);
+           // transform.Translate(Vector3.forward*Time.deltaTime*speed);
         }
             
-        private void OnTriggerStay(Collider other)
+        private void OnCollisionEnter(Collision other)
         {
-            if (other.CompareTag("Player"))
+            if (other.gameObject.CompareTag("Player"))
             {
                 other.gameObject.GetComponent<Player>().TakeDamage(damage, false, 0);
                 Destroy(gameObject);
@@ -37,5 +37,5 @@ using UnityEngine;
                 Destroy(gameObject);
             }
         }
-
-    }
+   
+}

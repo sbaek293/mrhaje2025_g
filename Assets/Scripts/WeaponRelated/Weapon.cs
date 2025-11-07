@@ -17,18 +17,18 @@ public class Weapon : MonoBehaviour
     public AudioSource sfx;
 
     public float currentCooldown;
-    
+
     public int currentIndex;
     private GameObject currentWeapon;
-    public float orgBloom;
+    private float orgBloom;
 
-    public float slowValue;
+    private float slowValue;
    
     public Player playerScript;
 
-    public int damage;
-    public float fireRate;
-    public float range;
+    private int damage;
+    private float fireRate;
+    private float range;
 
     [SerializeField]
     private ParticleSystem muzzleFlash;
@@ -127,7 +127,7 @@ public class Weapon : MonoBehaviour
                 muzzleFlash = gameObject.transform.Find("Weapon/" + currentWeapon.name + "/Anchor/Design/Barrel/Particle System").GetComponent<ParticleSystem>();
             muzzleFlash.Play();
 
-            Transform t_spawn = transform.Find("Cameras/Normal Camera");
+            Transform t_spawn = transform.Find("Main Camera");
 
             // bloom
             Vector3 t_bloom = t_spawn.position + t_spawn.forward * 1000f;
@@ -156,16 +156,16 @@ public class Weapon : MonoBehaviour
                 {
                         T.TakeDamage(damage);
                         t_newHole.transform.parent = t_hit.collider.gameObject.transform;
-                        Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
+                        //Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
                         Destroy(t_newHole, 0.5f);
                 }
             }
 
             //sound
-            sfx.Stop();
-            sfx.clip = loadout[currentIndex].gunshotSound;
-            sfx.pitch = 1 - loadout[currentIndex].pitchRandomization + Random.Range(-loadout[currentIndex].pitchRandomization, loadout[currentIndex].pitchRandomization);
-            sfx.Play();
+            //sfx.Stop();
+            //sfx.clip = loadout[currentIndex].gunshotSound;
+            //sfx.pitch = 1 - loadout[currentIndex].pitchRandomization + Random.Range(-loadout[currentIndex].pitchRandomization, loadout[currentIndex].pitchRandomization);
+            //sfx.Play();
             
             //gun fx
             currentWeapon.transform.Rotate(-loadout[currentIndex].recoil, 0, 0);

@@ -50,10 +50,10 @@ public class Player : MonoBehaviour
     public static GameObject HUD;
     public GameObject dmgTakenPanel;
     private GameObject dmgT;
-    private Text CDText;
-    private Image CDImage;
-    private Image ui_healthbar;
-    private Text ui_health;
+    public Text CDText;
+    public Image CDImage;
+    public Image ui_healthbar;
+    public Text ui_health;
 
     [Header("Combat")]
     public Weapon weapon;
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
     public float zoom;
     private float baseFOV;
     public float sprintFOVModifier;
-    public GameObject cameraParent;
+    //public GameObject cameraParent;
 
     [Header("Misc")]
     public Transform groundDetector;
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
         current_health = max_health;
         baseFOV = normalCam.fieldOfView;
 
-        if (Camera.main) Camera.main.enabled = false;
+        //if (Camera.main) Camera.main.enabled = false;
 
         weaponParentOrigin = weaponParent.localPosition;
 
@@ -285,7 +285,7 @@ public class Player : MonoBehaviour
     }
     public void TakeDamage(int damage, bool slow, float slowValue)
     {
-        Stamina.Instance.Recover(Stamina.StaminaEventType.TakeDamage);
+        //Stamina.Instance.Recover(Stamina.StaminaEventType.TakeDamage);
 
         
         current_health -= damage;

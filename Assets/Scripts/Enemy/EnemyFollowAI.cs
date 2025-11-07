@@ -88,8 +88,8 @@ public class EnemyFollowAI : MonoBehaviour
         {
             ///Attack code here
             Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            //rb.AddForce(transform.forward * attackForceForward, ForceMode.Impulse);
-            //rb.AddForce(transform.up * attackForceUp, ForceMode.Impulse);
+            rb.AddForce(transform.forward * attackForceForward, ForceMode.Impulse);
+            rb.AddForce(transform.up * attackForceUp, ForceMode.Impulse);
             ///End of attack code
             
             alreadyAttacked = true;

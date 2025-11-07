@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Basic
   m_EditorClassIdentifier: 
   name: Basic
-  damage: 100
+  damage: 10
   firerate: 0.5
   bloom: 20
   recoil: 10
@@ -23,6 +23,5 @@ MonoBehaviour:
   gunshotSound: {fileID: 8300000, guid: 6739c01659ad96d47987f4ddee226b36, type: 3}
   pitchRandomization: 0.05
   range: 10
-  bulletHole: {fileID: 2359044884367751165, guid: b6c3b1461d57b024391587671666bf5d,
-    type: 3}
+  bulletHole: {fileID: 2359044884367751165, guid: b6c3b1461d57b024391587671666bf5d, type: 3}
   burst: 0
