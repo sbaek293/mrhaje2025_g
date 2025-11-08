@@ -23,6 +23,8 @@ public class AutoTargetHaking : MonoBehaviour
     private Transform currentAutoTarget;
     private float currentTargetDistance;
 
+    private Transform fixedTarget = null;
+
     public bool isTargetUIExist = false;
     void OnEnable() => ChangeWorld.OnChangeWorld += HandleChangeWorld;
     void OnDisable() => ChangeWorld.OnChangeWorld -= HandleChangeWorld;
@@ -37,7 +39,7 @@ public class AutoTargetHaking : MonoBehaviour
 
     void LateUpdate()
     {
-        if (viewCam == null || canvas == null || !changeWorld.inCodeWorld()) return;
+        if (viewCam == null || canvas == null || !changeWorld.inCodeWorld() || fixedTarget != null) return;
 
         Transform closestEnemy = null;
         float closestDistence = detectRange + 1;
@@ -103,6 +105,80 @@ public class AutoTargetHaking : MonoBehaviour
             isTargetUIExist = true;
         }
     }
+
+    private void Update()
+    {
+        OpenUIwithShift();
+
+        CloseUIwithShift();
+    }
+
+    private void OpenUIwithClick()
+    {
+        if (Input.GetMouseButtonDown(0) && changeWorld.inCodeWorld()) //left click -> open properties UI
+        {
+            if (currentAutoTarget != null && fixedTarget == null)
+            {
+
+                fixedTarget = currentAutoTarget;
+
+                EnemyPropertyManager enemyScript = fixedTarget.GetComponent<EnemyPropertyManager>();
+                if (enemyScript != null)
+                {
+                    Debug.Log($"Calling SpawnProperty on: {fixedTarget.name}");
+                    enemyScript.SpawnPropertyUI();
+                }
+                else
+                {
+                    Debug.LogWarning($"Hit enemy {fixedTarget.name} does not have Property Info!");
+                }
+            }
+        }
+    }
+
+    private void CloseUIwithClick()
+    {
+        if (Input.GetMouseButtonDown(1) && changeWorld.inCodeWorld() && fixedTarget != null) //right click -> close properties UI
+        {
+            fixedTarget.GetComponent<EnemyPropertyManager>().ClearAllPropertyUI();
+            ClearTargetUI();
+            fixedTarget = null;
+        }
+    }
+
+    private void OpenUIwithShift()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && changeWorld.inCodeWorld()) //left click -> open properties UI
+        {
+            if (currentAutoTarget != null && fixedTarget == null)
+            {
+
+                fixedTarget = currentAutoTarget;
+
+                EnemyPropertyManager enemyScript = fixedTarget.GetComponent<EnemyPropertyManager>();
+                if (enemyScript != null)
+                {
+                    Debug.Log($"Calling SpawnProperty on: {fixedTarget.name}");
+                    enemyScript.SpawnPropertyUI();
+                }
+                else
+                {
+                    Debug.LogWarning($"Hit enemy {fixedTarget.name} does not have Property Info!");
+                }
+            }
+        }
+    }
+
+    private void CloseUIwithShift()
+    {
+        if (Input.GetKeyUp(KeyCode.LeftShift) && changeWorld.inCodeWorld() && fixedTarget != null) //right click -> close properties UI
+        {
+            fixedTarget.GetComponent<EnemyPropertyManager>().ClearAllPropertyUI();
+            ClearTargetUI();
+            fixedTarget = null;
+        }
+    }
+
 
     void ClearTargetUI()
     {

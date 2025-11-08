@@ -59,13 +59,6 @@ public class UIFollowTarget : MonoBehaviour
                         screenPos.x >= 0 && screenPos.x <= Screen.width &&
                         screenPos.y >= 0 && screenPos.y <= Screen.height;
 
-        if (!onScreen)
-        {
-            //Debug.Log($"[UIFollowTarget] Property is unactive, target: {target.name}, screenPos: {screenPos}, onScreen: {onScreen}", this.gameObject);
-        }
-
-        //rect.gameObject.SetActive(onScreen);
-
         if (onScreen)
         {
             rect.position = screenPos + screenOffset;

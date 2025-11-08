@@ -196,9 +196,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   properties: []
   propertyUIPrefab: {fileID: 950460667792842795, guid: 97090cf849be9574fa024a72dc298e45, type: 3}
-  propertyContainerPrefab: {fileID: 1701538885270466888, guid: 30f15463f8f33994ca7a68f0976f0373, type: 3}
+  propertyContainerPrefab: {fileID: 3907713592994837686, guid: 8aa6d69651f8c2144987235da52a94f1, type: 3}
   uiCanvas: {fileID: 0}
   mainCamera: {fileID: 0}
+  iconPlacedRadius: 32
+  blankBetweenNode: 0.05
 --- !u!1 &4016604180216185033
 GameObject:
   m_ObjectHideFlags: 0
