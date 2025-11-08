@@ -11,6 +11,7 @@ public class AutoTargetHaking : MonoBehaviour
     [Header("Refs")]
     public Camera viewCam;
     public Canvas canvas;
+    public ChangeWorld changeWorld;
 
     [Header("Behavior")]
     public float detectRange = 100f;
@@ -23,6 +24,8 @@ public class AutoTargetHaking : MonoBehaviour
     private float currentTargetDistance;
 
     public bool isTargetUIExist = false;
+    void OnEnable() => ChangeWorld.OnChangeWorld += HandleChangeWorld;
+    void OnDisable() => ChangeWorld.OnChangeWorld -= HandleChangeWorld;
 
     void Awake()
     {
@@ -34,7 +37,7 @@ public class AutoTargetHaking : MonoBehaviour
 
     void LateUpdate()
     {
-        if (viewCam == null || canvas == null) return;
+        if (viewCam == null || canvas == null || !changeWorld.inCodeWorld()) return;
 
         Transform closestEnemy = null;
         float closestDistence = detectRange + 1;
@@ -112,5 +115,10 @@ public class AutoTargetHaking : MonoBehaviour
         currentAutoTarget = null;
         currentTargetDistance = detectRange + 1;
         isTargetUIExist = false;
+    }
+
+    void HandleChangeWorld(int _currentWorld)
+    {
+        ClearTargetUI();
     }
 }
