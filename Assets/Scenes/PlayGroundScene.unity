@@ -10131,6 +10131,10 @@ PrefabInstance:
       value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -648380416258262209, guid: b331b40afd376084c8aa6c6b8ad806c2, type: 3}
+      propertyPath: uiDistanceOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -648380416258262209, guid: b331b40afd376084c8aa6c6b8ad806c2, type: 3}
       propertyPath: properties.Array.size
       value: 3
       objectReference: {fileID: 0}

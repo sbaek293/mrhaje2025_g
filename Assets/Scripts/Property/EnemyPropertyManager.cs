@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,12 +12,14 @@ public class EnemyPropertyManager : PropertyManager
     public Camera mainCamera;
 
     [Header("UI")]
+    public float uiDistanceOffset = -10f;
+    public bool matchCameraRotation = false;
     public float iconPlacedRadius = 32;
     public float blankBetweenNode = 0.01f;
 
-    private GameObject propertyUIContainer;
+    private GameObject propertyUIContainer = null;
 
-    private bool isUIExist = false;
+    private GameObject uiPivotPoint3D = null;
 
     private int currentWorld = 0;
 
@@ -48,22 +49,6 @@ public class EnemyPropertyManager : PropertyManager
         {
             mainCamera = Camera.main;
         }
-
-        //make container for property UI
-        propertyUIContainer = Instantiate(propertyContainerPrefab, uiCanvas.transform);
-
-        // set UIFollowTarget script
-        UIFollowTarget follow = propertyUIContainer.GetComponent<UIFollowTarget>();
-        if (follow != null)
-        {
-            follow.target = this.transform;
-            follow.viewCam = mainCamera;
-            follow.canvas = uiCanvas;
-        }
-        else
-        {
-            Debug.LogWarning("UIFollowTarget Componant is not existed in Prefab.", propertyUIContainer);
-        }
     }
 
     // Update is called once per frame
@@ -75,7 +60,7 @@ public class EnemyPropertyManager : PropertyManager
     void HandleChangeWorld(int _currentWorld)
     {
         currentWorld = _currentWorld;
-        if (isUIExist && currentWorld == 0)
+        if (propertyUIContainer != null && currentWorld == 0)
         {
             ClearAllPropertyUI();
         }
@@ -83,8 +68,25 @@ public class EnemyPropertyManager : PropertyManager
 
     public void SpawnPropertyUI()
     {
-        if (!isUIExist)
+        if (propertyUIContainer == null)
         {
+            float distenceEnemyAndCamera = Vector3.Distance(mainCamera.transform.position, GetComponent<Transform>().position);
+            Vector3 spawnPos = mainCamera.transform.position + mainCamera.transform.forward * (distenceEnemyAndCamera + uiDistanceOffset);
+
+            uiPivotPoint3D = new GameObject("UIPivotPoint3D");
+            uiPivotPoint3D.transform.position = spawnPos;
+
+            if (matchCameraRotation)
+            {
+                uiPivotPoint3D.transform.rotation = mainCamera.transform.rotation;
+            }
+
+            propertyUIContainer = Instantiate(propertyContainerPrefab, uiCanvas.transform);
+
+            //set following target
+            UIFollowTarget uIFollowTarget = propertyUIContainer.GetComponent<UIFollowTarget>();
+            uIFollowTarget.target = uiPivotPoint3D.transform;
+
             for (int i = 0; i < properties.Count; i++)
             {
                 PropertyDatas prop = properties[i];
@@ -121,8 +123,6 @@ public class EnemyPropertyManager : PropertyManager
                 }
             }
 
-            isUIExist = true;
-
             //setting Function of propertyUIContainer
         }
     }
@@ -130,12 +130,15 @@ public class EnemyPropertyManager : PropertyManager
 
     public void ClearAllPropertyUI()
     {
-        //clear children of parentContainer
-        for (int i = propertyUIContainer.transform.childCount - 1; i >= 0; i--)
+        if (propertyUIContainer != null)
         {
-            Destroy(propertyUIContainer.transform.GetChild(i).gameObject);
+            Destroy(propertyUIContainer.gameObject);
+        }
+        if (uiPivotPoint3D != null)
+        {
+            Destroy(uiPivotPoint3D.gameObject);
         }
 
-        isUIExist = false;
+        propertyUIContainer = null;
     }
 }
