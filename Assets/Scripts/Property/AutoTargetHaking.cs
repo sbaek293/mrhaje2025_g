@@ -151,7 +151,7 @@ public class AutoTargetHaking : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && changeWorld.inCodeWorld() && fixedTarget != null) //right click -> close properties UI
         {
-            fixedTarget.GetComponent<EnemyPropertyManager>().ClearAllPropertyUI();
+            fixedTarget.GetComponent<EnemyPropertyManager>().ClearPropertyUI();
             ClearTargetUI();
             fixedTarget = null;
         }
@@ -188,7 +188,7 @@ public class AutoTargetHaking : MonoBehaviour
             
 
             //remove UI
-            fixedTarget.GetComponent<EnemyPropertyManager>().ClearAllPropertyUI();
+            fixedTarget.GetComponent<EnemyPropertyManager>().ClearPropertyUI();
             ClearTargetUI();
             fixedTarget = null;
         }
@@ -210,19 +210,20 @@ public class AutoTargetHaking : MonoBehaviour
 
     void HandleChangeWorld(int _currentWorld)
     {
-        currentWorld = _currentWorld;
-        if (propertyUIContainer != null && currentWorld == 0)
+        if (propertyUIContainer != null && _currentWorld == 0)
         {
-            ClearAllPropertyUI();
+            ClearPropertyUI();
+            ClearTargetUI();
         }
-        ClearTargetUI();
     }
 
     public void SpawnPropertyUI()
     {
+        if (fixedTarget == null) return;
+
         if (propertyUIContainer == null)
         {
-            float distenceEnemyAndCamera = Vector3.Distance(mainCamera.transform.position, GetComponent<Transform>().position);
+            float distenceEnemyAndCamera = Vector3.Distance(mainCamera.transform.position, fixedTarget.GetComponent<Transform>().position);
             Vector3 spawnPos = mainCamera.transform.position + mainCamera.transform.forward * (distenceEnemyAndCamera + uiDistanceOffset);
 
             uiPivotPoint3D = new GameObject("UIPivotPoint3D");
@@ -241,7 +242,7 @@ public class AutoTargetHaking : MonoBehaviour
 
             for (int i = 0; i < properties.Count; i++)
             {
-                PropertyDatas prop = properties[i];
+                PropertyDatas prop = fixedTarget.GetPropertyByIndex(i);
                 GameObject propertiesInstance = Instantiate(propertyUIPrefab, propertyUIContainer.transform);
 
                 //set text, icon, click event
@@ -280,7 +281,7 @@ public class AutoTargetHaking : MonoBehaviour
     }
 
 
-    public void ClearAllPropertyUI()
+    public void ClearPropertyUI()
     {
         if (propertyUIContainer != null)
         {
