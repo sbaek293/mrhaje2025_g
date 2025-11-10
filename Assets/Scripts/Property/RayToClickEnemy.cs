@@ -29,7 +29,7 @@ public class RayToClickEnemy : MonoBehaviour
                 if (enemyScript != null)
                 {
                     Debug.Log($"Calling SpawnProperty on: {hitObject.name}");
-                    enemyScript.SpawnPropertyUI();
+                    //enemyScript.SpawnPropertyUI();
                 }
                 else
                 {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class CenterUISelect : MonoBehaviour
 {
-    public Canvas uiCanvas;
+    public Canvas canvas;
     public GraphicRaycaster raycaster;
     public EventSystem eventSystem;
 
@@ -15,11 +15,11 @@ public class CenterUISelect : MonoBehaviour
 
     void Awake()
     {
-        if (uiCanvas == null)
-            uiCanvas = FindObjectsByType<Canvas>(FindObjectsSortMode.None)[0];
+        if (canvas == null)
+            canvas = FindObjectsByType<Canvas>(FindObjectsSortMode.None)[0];
 
-        if (raycaster == null && uiCanvas != null)
-            raycaster = uiCanvas.GetComponent<GraphicRaycaster>();
+        if (raycaster == null && canvas != null)
+            raycaster = canvas.GetComponent<GraphicRaycaster>();
 
         if (eventSystem == null)
             eventSystem = FindObjectsByType<EventSystem>(FindObjectsSortMode.None)[0];

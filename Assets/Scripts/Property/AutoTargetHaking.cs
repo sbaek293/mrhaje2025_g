@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AutoTargetHaking : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class AutoTargetHaking : MonoBehaviour
     public Transform autoTargetUIContainer;
     public GameObject autoTargetPrefab;
 
-    [Header("Property UI")]
+    [Header("Enemy Property UI")]
     public GameObject propertyUIPrefab;
     public GameObject propertyContainerPrefab;
     public Vector3 screenOffset = new Vector2(0, 0f);
@@ -133,16 +134,7 @@ public class AutoTargetHaking : MonoBehaviour
 
                 fixedTarget = currentAutoTarget;
 
-                EnemyPropertyManager enemyScript = fixedTarget.GetComponent<EnemyPropertyManager>();
-                if (enemyScript != null)
-                {
-                    Debug.Log($"Calling SpawnProperty on: {fixedTarget.name}");
-                    enemyScript.SpawnPropertyUI();
-                }
-                else
-                {
-                    Debug.LogWarning($"Hit enemy {fixedTarget.name} does not have Property Info!");
-                }
+                SpawnPropertyUI();
             }
         }
     }
@@ -151,7 +143,7 @@ public class AutoTargetHaking : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && changeWorld.inCodeWorld() && fixedTarget != null) //right click -> close properties UI
         {
-            fixedTarget.GetComponent<EnemyPropertyManager>().ClearPropertyUI();
+            ClearPropertyUI();
             ClearTargetUI();
             fixedTarget = null;
         }
@@ -166,16 +158,7 @@ public class AutoTargetHaking : MonoBehaviour
 
                 fixedTarget = currentAutoTarget;
 
-                EnemyPropertyManager enemyScript = fixedTarget.GetComponent<EnemyPropertyManager>();
-                if (enemyScript != null)
-                {
-                    Debug.Log($"Calling SpawnProperty on: {fixedTarget.name}");
-                    enemyScript.SpawnPropertyUI();
-                }
-                else
-                {
-                    Debug.LogWarning($"Hit enemy {fixedTarget.name} does not have Property Info!");
-                }
+                SpawnPropertyUI();
             }
         }
     }
@@ -188,7 +171,7 @@ public class AutoTargetHaking : MonoBehaviour
             
 
             //remove UI
-            fixedTarget.GetComponent<EnemyPropertyManager>().ClearPropertyUI();
+            ClearPropertyUI();
             ClearTargetUI();
             fixedTarget = null;
         }
@@ -234,15 +217,17 @@ public class AutoTargetHaking : MonoBehaviour
                 uiPivotPoint3D.transform.rotation = mainCamera.transform.rotation;
             }
 
-            propertyUIContainer = Instantiate(propertyContainerPrefab, uiCanvas.transform);
+            propertyUIContainer = Instantiate(propertyContainerPrefab, canvas.transform);
 
             //set following target
             UIFollowTarget uIFollowTarget = propertyUIContainer.GetComponent<UIFollowTarget>();
             uIFollowTarget.target = uiPivotPoint3D.transform;
 
-            for (int i = 0; i < properties.Count; i++)
+
+            EnemyPropertyManager propertyManager = fixedTarget.GetComponent<EnemyPropertyManager>();
+            for (int i = 0; i < propertyManager.properties.Count; i++)
             {
-                PropertyDatas prop = fixedTarget.GetPropertyByIndex(i);
+                PropertyDatas prop = propertyManager.GetPropertyByIndex(i);
                 GameObject propertiesInstance = Instantiate(propertyUIPrefab, propertyUIContainer.transform);
 
                 //set text, icon, click event
@@ -253,26 +238,26 @@ public class AutoTargetHaking : MonoBehaviour
                 EnemyPropertyClick propClick = propertiesInstance.GetComponent<EnemyPropertyClick>();
 
                 if (backImg != null) {
-                    backImg.fillAmount = 1f / properties.Count - blankBetweenNode;
+                    backImg.fillAmount = 1f / propertyManager.properties.Count - blankBetweenNode;
                     Debug.LogWarning($"fillAmount : {backImg.fillAmount}");
-                    backImg.transform.Rotate(0,0,-(360f / properties.Count)*i - 360f* blankBetweenNode/2);
+                    backImg.transform.Rotate(0,0,-(360f / propertyManager.properties.Count)*i - 360f* blankBetweenNode/2);
                 }
                 if (label != null)
                 {
                     label.text = prop.propertyName;
                 }
                 if (iconRotator != null) {
-                    iconRotator.Rotate(0,0,-(360f / properties.Count)/2 + 360f * blankBetweenNode / 2);
+                    iconRotator.Rotate(0,0,-(360f / propertyManager.properties.Count)/2 + 360f * blankBetweenNode / 2);
                 }
                 if (img != null)
                 {
-                    img.transform.Rotate(0, 0, (360f / properties.Count)*(i+0.5f));
+                    img.transform.Rotate(0, 0, (360f / propertyManager.properties.Count)*(i+0.5f));
                     img.sprite = prop.icon;
                 }
                 if (propClick != null)
                 {
                     propClick.prop = prop;
-                    propClick.owner = this;
+                    propClick.owner = propertyManager;
                 }
             }
 

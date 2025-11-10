@@ -3574,13 +3574,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 256703443}
     - target: {fileID: 3467514255953773381, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 2050435603}
+    - target: {fileID: 3467514255953773381, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: enemyContainer
       value: 
       objectReference: {fileID: 1409798297}
     - target: {fileID: 3467514255953773381, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: propertyUIPrefab
+      value: 
+      objectReference: {fileID: 950460667792842795, guid: 97090cf849be9574fa024a72dc298e45, type: 3}
+    - target: {fileID: 3467514255953773381, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: autoTargetUIContainer
       value: 
       objectReference: {fileID: 1540337666}
+    - target: {fileID: 3467514255953773381, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: propertyContainerPrefab
+      value: 
+      objectReference: {fileID: 3907713592994837686, guid: 8aa6d69651f8c2144987235da52a94f1, type: 3}
     - target: {fileID: 4276371079233385056, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: propertiesContainer
       value: 
