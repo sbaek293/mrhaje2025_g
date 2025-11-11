@@ -56,10 +56,10 @@ public class CenterUISelect : MonoBehaviour
 
                 if (selectedUI != null)
                 {
-                    if (selectedUI.GetComponent<EnemyPropertyClick>() != null)
+                    if (selectedUI.GetComponent<EnemyPropertyUINodeInterect>() != null)
                     {
-                        EnemyPropertyClick propClick = selectedUI.GetComponent<EnemyPropertyClick>();
-                        PropertyDatas prop = propClick.SteelProperty();
+                        EnemyPropertyUINodeInterect propClick = selectedUI.GetComponent<EnemyPropertyUINodeInterect>();
+                        PropertyDatas prop = propClick.StealProperty();
                         PlayerPropertyManager propManager = player.GetComponent<PlayerPropertyManager>();
                         propManager.AddProperty(prop);
                         player.GetComponent<ChangeWorld>().changeWorldFunc();
