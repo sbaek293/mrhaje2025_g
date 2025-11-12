@@ -22,6 +22,6 @@ MonoBehaviour:
   prefab: {fileID: 2695149959096659809, guid: fa9047b95382895459b4a989b9600127, type: 3}
   gunshotSound: {fileID: 8300000, guid: 6739c01659ad96d47987f4ddee226b36, type: 3}
   pitchRandomization: 0.05
-  range: 10
+  range: 5
   bulletHole: {fileID: 2359044884367751165, guid: b6c3b1461d57b024391587671666bf5d, type: 3}
   burst: 0

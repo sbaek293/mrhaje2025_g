@@ -34,15 +34,15 @@ public class AbilityScript : MonoBehaviour
         {
             org_jump = playerScript.jumpForce;
             abilityImage.sprite = propertyManager.properties[0].icon;   
-            playerScript.jumpForce += 500f;
+            playerScript.jumpForce += 700f;
             Invoke("resetJumpForce", 3f);
-        }
+        } 
     }
 
-    void resetJumpForce(float org_jump)
+    void resetJumpForce()
     {
         playerScript.jumpForce = org_jump;
-        propertyManager.RemoveProperty(propertyManager.properties[0]);
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
         abilityImage.sprite = null;
     }
 }
