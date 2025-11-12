@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab4b13755e66d446b83f6ed2a29b9d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiCanvas: {fileID: 0}
+  canvas: {fileID: 0}
   raycaster: {fileID: 0}
   eventSystem: {fileID: 0}
   player: {fileID: 1022497278443607873}
@@ -282,8 +282,14 @@ MonoBehaviour:
   enemyContainer: {fileID: 0}
   autoTargetUIContainer: {fileID: 0}
   autoTargetPrefab: {fileID: 2964165134593362854, guid: abac436fedb5d324fa980fc4ca251ee6, type: 3}
+  propertyUIPrefab: {fileID: 0}
+  propertyContainerPrefab: {fileID: 0}
   screenOffset: {x: 0, y: 0, z: 0}
-  viewCam: {fileID: 6162425749606664696}
+  uiDistanceOffset: -10
+  matchCameraRotation: 0
+  iconPlacedRadius: 32
+  blankBetweenNode: 0.01
+  mainCamera: {fileID: 0}
   canvas: {fileID: 0}
   changeWorld: {fileID: 4364563900743112101}
   detectRange: 120
@@ -422,6 +428,7 @@ GameObject:
   - component: {fileID: 5531868032012347872}
   - component: {fileID: 5083486558193423442}
   - component: {fileID: 4364563900743112101}
+  - component: {fileID: 5931604676491082651}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -722,3 +729,19 @@ MonoBehaviour:
   v: {fileID: 1587788896283755596}
   l: {fileID: 0}
   shaderTest: {fileID: 5531868032012347872}
+--- !u!114 &5931604676491082651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481567867750123350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63fc91ae52c22244dba2c1f78661f9ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propertyDatas:
+  - {fileID: 0}
+  playerScript: {fileID: 8961229792895477777}
+  weaponScript: {fileID: 8492509272320255162}
