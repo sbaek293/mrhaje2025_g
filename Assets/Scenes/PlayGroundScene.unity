@@ -3574,6 +3574,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 256703443}
     - target: {fileID: 3467514255953773381, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1386703920}
+    - target: {fileID: 3467514255953773381, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 2050435603}
@@ -3585,6 +3589,14 @@ PrefabInstance:
       propertyPath: propertyUIPrefab
       value: 
       objectReference: {fileID: 950460667792842795, guid: 97090cf849be9574fa024a72dc298e45, type: 3}
+    - target: {fileID: 3467514255953773381, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: uiDistanceOffset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3467514255953773381, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: matchCameraRotation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3467514255953773381, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: autoTargetUIContainer
       value: 

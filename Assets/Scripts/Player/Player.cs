@@ -216,7 +216,7 @@ public class Player : MonoBehaviour
         float t_vmove = Input.GetAxisRaw("Vertical");
 
         //Controls
-        bool sprint = Input.GetKey(KeyCode.LeftShift);
+        bool sprint = Input.GetKey(KeyCode.LeftControl);
         bool jump = Input.GetKeyDown(KeyCode.Space);
         bool aim = Input.GetMouseButton(1);
 
