@@ -220,10 +220,13 @@ public class AutoTargetHaking : MonoBehaviour
             //get property if any node is selected
             if (selectedNodeIndex != -1)
             {
-                PropertyDatas stolenProperty = propertyUIContainer.transform.GetChild(selectedNodeIndex).GetComponent<EnemyPropertyUINodeInterect>().StealProperty();
-                PlayerPropertyManager propManager = player.GetComponent<PlayerPropertyManager>();
-                propManager.AddProperty(stolenProperty);
-                player.GetComponent<ChangeWorld>().changeWorldFunc();
+                if (propertyUIContainer != null)
+                {
+                    PropertyDatas stolenProperty = propertyUIContainer.transform.GetChild(selectedNodeIndex).GetComponent<EnemyPropertyUINodeInterect>().StealProperty();
+                    PlayerPropertyManager propManager = player.GetComponent<PlayerPropertyManager>();
+                    propManager.AddProperty(stolenProperty);
+                    player.GetComponent<ChangeWorld>().changeWorldFunc();
+                }
             }
 
             //remove UI

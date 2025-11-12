@@ -6,6 +6,7 @@ public class Rabbit : MonoBehaviour
 
     private float jumpCD;
     public Rigidbody rb;
+    public SphereCollider sphereCollider;
     public float jumpForce = 200f;
     public PropertyManager propertyManager;
     void Start()
@@ -25,6 +26,11 @@ public class Rabbit : MonoBehaviour
         if(propertyManager.properties.Count == 0)
         {
             jumpForce = 0f;
+
+            if (sphereCollider != null)
+            {
+                sphereCollider.sharedMaterial = null;
+            }
         }
     }
 

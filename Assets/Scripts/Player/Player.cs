@@ -74,12 +74,13 @@ public class Player : MonoBehaviour
     public Transform groundDetector;
     public LayerMask ground;
     public Rigidbody rig;
+    public CapsuleCollider col;
     public GameObject environment;
     private float movementCounter;
     private float idleCounter;
     public PauseScript pauseScript;
     public bool touchingWall = false;
-
+    public Transform spawnPoint;
 
     [Header("SFX")]
     public AudioClip jump;
@@ -297,8 +298,7 @@ public class Player : MonoBehaviour
 
         if (current_health <= 0)
         {
-            Debug.Log("DEAD");
-            //manager.Spawn();
+            transform.position = spawnPoint.transform.position;
         }
     }
 
