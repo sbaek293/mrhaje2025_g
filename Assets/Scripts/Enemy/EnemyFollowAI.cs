@@ -6,7 +6,7 @@ public class EnemyFollowAI : MonoBehaviour
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
-
+  
     //Patroling
     public Vector3 walkPoint;
     bool walkPointSet;
@@ -23,6 +23,7 @@ public class EnemyFollowAI : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -45,8 +46,11 @@ public class EnemyFollowAI : MonoBehaviour
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
 
-    }
+        
 
+
+    }
+   
     private void Patroling()
     {
         if (!walkPointSet) SearchWalkPoint();
