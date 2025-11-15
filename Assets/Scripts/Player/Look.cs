@@ -62,8 +62,10 @@ public class Look : MonoBehaviour
         {
             cams.localRotation = t_delta;
         }
-
-        weapon.rotation = cams.rotation;
+        if (weapon)
+        {
+            weapon.rotation = cams.rotation;
+        }
 
     }
 
