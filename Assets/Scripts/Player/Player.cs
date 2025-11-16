@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 using UnityEngine.SceneManagement;
@@ -44,6 +45,9 @@ public class Player : MonoBehaviour
     public int max_health;
     public float current_health;
     public float regen;
+    public float originalWeight;
+    public String movementType = "normal";
+    public bool stunned = false;
 
 
     [Header("UI")]
@@ -66,7 +70,7 @@ public class Player : MonoBehaviour
     [Header("Camera")]
     public Camera normalCam;
     public float zoom;
-    private float baseFOV;
+    public float baseFOV;
     public float sprintFOVModifier;
     //public GameObject cameraParent;
 
@@ -203,6 +207,11 @@ public class Player : MonoBehaviour
             weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetWeaponBobPosition, Time.fixedDeltaTime * 10f);
         }
 
+        if (Input.GetKeyDown("h"))
+        {
+            rig.AddForce(Vector3.up * jumpForce);
+        }
+
     }
 
 
@@ -229,17 +238,31 @@ public class Player : MonoBehaviour
 
 
         //Movement
-        if (isGrounded || !touchingWall)
+        if (isGrounded || !touchingWall || !stunned)
         {
-            Vector3 t_direction = new Vector3(t_hmove, 0, t_vmove);
-            t_direction.Normalize();
+            if (movementType == "normal")
+            {
+                Vector3 t_direction = new Vector3(t_hmove, 0, t_vmove);
+                t_direction.Normalize();
 
-            t_adjustedSpeed = originalSpeed;
-            if (isSprinting) t_adjustedSpeed *= sprintModifier;
+                t_adjustedSpeed = originalSpeed;
+                if (isSprinting) t_adjustedSpeed *= sprintModifier;
 
-            Vector3 t_targetVelocity = transform.TransformDirection(t_direction) * t_adjustedSpeed * Time.fixedDeltaTime;
-            t_targetVelocity.y = rig.linearVelocity.y;
-            rig.linearVelocity = t_targetVelocity;
+                Vector3 t_targetVelocity = transform.TransformDirection(t_direction) * t_adjustedSpeed * Time.fixedDeltaTime;
+                t_targetVelocity.y = rig.linearVelocity.y;
+                rig.linearVelocity = t_targetVelocity;
+            }
+            else if (movementType == "truck")
+            {
+                t_adjustedSpeed += originalSpeed*1.5f * Time.fixedDeltaTime;
+                t_adjustedSpeed = Mathf.Clamp(t_adjustedSpeed, 0, originalSpeed*6);
+
+                Vector3 forwardVelocity = transform.forward * t_adjustedSpeed * Time.fixedDeltaTime;
+                forwardVelocity.y = rig.linearVelocity.y;
+
+                rig.linearVelocity = forwardVelocity;
+            }
+            
         }
 
         //FOV
@@ -308,8 +331,24 @@ public class Player : MonoBehaviour
         {
 
             touchingWall = true;
+        } else if (collision.gameObject.layer == 6)
+        {
+            if (collision.gameObject.GetComponent<Truck>() != null)
+            {
+                Debug.LogWarning("Collide With truck");
+                if (collision.gameObject.GetComponent<EnemyPropertyManager>().HasPropertyName("Heavy") && collision.gameObject.GetComponent<EnemyPropertyManager>().HasPropertyName("Dash"))
+                {
+                    Debug.LogWarning("truck is heavy");
+                    Vector3 forcedir = (transform.position - collision.gameObject.transform.position).normalized;
+                    forcedir += Vector3.up;
+                    stunned = true;
+                    Debug.LogWarning($"forcedir : {forcedir}");
+                    rig.AddForce(forcedir * 10000, ForceMode.Force);
+                }
+            }
         }
     }
+
 
 
     private void OnCollisionExit(Collision collision)

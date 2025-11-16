@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 public class CircularTimer : MonoBehaviour
 {
-    [SerializeField] private Image radialImage;
-    [SerializeField] private float duration = 5f;
+    [SerializeField] public Image radialImage;
+    [SerializeField] public float duration = 5f;
     public float remainingTime;
 
     private void OnEnable()
     {
-        StartTimer(duration);
+        //StartTimer(duration);
     }
 
     public void StartTimer(float time)

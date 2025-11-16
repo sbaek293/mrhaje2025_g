@@ -15,6 +15,8 @@ public class AbilityScript : MonoBehaviour
 
     public PhysicsMaterial newMaterial;
     public PhysicsMaterial oldMaterial;
+
+    public AudioClip hornSound;
     public void Start()
     {
 
@@ -53,6 +55,33 @@ public class AbilityScript : MonoBehaviour
             abilityImage.sprite = propertyManager.properties[0].icon;
             Invoke("resetRed", 3f);
         }
+        else if (propertyManager.properties[0].name == "Dash")
+        {
+            playerScript.movementType = "truck";
+            playerScript.normalCam.fieldOfView = playerScript.baseFOV * 1.3f;
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            Invoke("resetDash", 10f);
+        }
+        else if (propertyManager.properties[0].name == "Heavy")
+        {
+            org_speed = playerScript.originalSpeed;
+            playerScript.rig.mass = playerScript.originalWeight * 5;
+            playerScript.originalSpeed *= 0.5f;
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            Invoke("resetHeavy", 10f);
+        }
+        else if (propertyManager.properties[0].name == "Horn")
+        {
+            AudioManager.PlaySound(gameObject, hornSound, false, 10, 0.1f);
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            Invoke("resetHorn", 0.25f);
+        }
+        else if (propertyManager.properties[0].name == "Shield")
+        {
+            playerScript.col.sharedMaterial = newMaterial;
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            Invoke("resetShield", 3f);
+        }
     }
 
     void resetJumpForce()
@@ -70,6 +99,36 @@ public class AbilityScript : MonoBehaviour
     }
 
     void resetRed()
+    {
+        playerScript.col.sharedMaterial = oldMaterial;
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        abilityImage.sprite = null;
+    }
+
+    void resetDash()
+    {
+        playerScript.movementType = "normal";
+        playerScript.normalCam.fieldOfView = playerScript.baseFOV;
+
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        abilityImage.sprite = null;
+    }
+
+    void resetHeavy()
+    {
+        playerScript.rig.mass = playerScript.originalWeight;
+        playerScript.originalSpeed = org_speed;
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        abilityImage.sprite = null;
+    }
+
+    void resetHorn()
+    {
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        abilityImage.sprite = null;
+    }
+
+    void resetShield()
     {
         playerScript.col.sharedMaterial = oldMaterial;
         //propertyManager.RemoveProperty(propertyManager.properties[0]);

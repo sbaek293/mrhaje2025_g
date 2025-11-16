@@ -10,7 +10,7 @@ public class Stamina : MonoBehaviour
     
     // 능력의 스태미나 소모는 100으로 고정한다 가정함
     public int maxStamina = 200;
-    private float stamina;
+    public float stamina;
 
     public enum StaminaEventType
     {

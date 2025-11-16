@@ -53,6 +53,7 @@ public class PlayerPropertyManager : PropertyManager
         if (propertiesContainer == null) { Debug.LogError("AddProperty: propertiesContainer not assigned"); return; }
 
         GameObject newTimer = Instantiate(propertyItemPrefab, propertiesContainer);
+        newTimer.GetComponent<CircularTimer>().StartTimer(propData.maxDuration);
 
         //set name and image
         string displayName = propData.propertyName;
