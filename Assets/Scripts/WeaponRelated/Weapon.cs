@@ -40,10 +40,7 @@ public class Weapon : MonoBehaviour
     {
         HUD = GameObject.Find("HUD").gameObject;
         Equip(0);
-        fireRate = loadout[currentIndex].firerate;
-        damage = loadout[currentIndex].damage;
-        range = loadout[currentIndex].range;
-        orgBloom = loadout[currentIndex].bloom;
+        
     }
     void Update()
     {
@@ -61,11 +58,15 @@ public class Weapon : MonoBehaviour
                         {
                             Shoot();
                         }
-                        else if (Input.GetMouseButton(0) && currentCooldown <= 0 && loadout[currentIndex].burst == 1)
-                        {
-                            Shoot(); 
-                        }
+                         
                    
+                }else
+                {
+                    Aim(Input.GetMouseButton(1));
+                        if (Input.GetMouseButton(0) && currentCooldown <= 0 )
+                        {
+                            Shoot();
+                        }
                 }
         }
 
@@ -86,11 +87,16 @@ public class Weapon : MonoBehaviour
     
     }
 
-    void Equip(int p_ind)
+    public void Equip(int p_ind)
     {
         if (currentWeapon != null) Destroy(currentWeapon);
 
         currentIndex = p_ind;
+
+        fireRate = loadout[currentIndex].firerate;
+        damage = loadout[currentIndex].damage;
+        range = loadout[currentIndex].range;
+        orgBloom = loadout[currentIndex].bloom;
 
         GameObject t_newWeapon = Instantiate(loadout[p_ind].prefab, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject;
         t_newWeapon.transform.localPosition = Vector3.zero;
@@ -120,9 +126,7 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
-        if (currentIndex == 0)
-        {
-           
+        
             if (muzzleFlash == null)
                 muzzleFlash = gameObject.transform.Find("Weapon/" + currentWeapon.name + "/Anchor/Design/Barrel/Particle System").GetComponent<ParticleSystem>();
             muzzleFlash.Play();
@@ -169,7 +173,7 @@ public class Weapon : MonoBehaviour
             
             //gun fx
             currentWeapon.transform.Rotate(-loadout[currentIndex].recoil, 0, 0);
-        }
+        
     }
     //public void Attack()
     //{

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -81,6 +82,11 @@ public class AbilityScript : MonoBehaviour
             playerScript.col.sharedMaterial = newMaterial;
             abilityImage.sprite = propertyManager.properties[0].icon;
             Invoke("resetShield", 3f);
+        }else if (propertyManager.properties[0].name == "Automatic")
+        {
+            weaponScript.Equip(1);
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            Invoke("resetAuto", 7f);
         }
     }
 
@@ -131,6 +137,13 @@ public class AbilityScript : MonoBehaviour
     void resetShield()
     {
         playerScript.col.sharedMaterial = oldMaterial;
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        abilityImage.sprite = null;
+    }
+
+    void resetAuto()
+    {
+        weaponScript.Equip(0);
         //propertyManager.RemoveProperty(propertyManager.properties[0]);
         abilityImage.sprite = null;
     }

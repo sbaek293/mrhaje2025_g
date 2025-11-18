@@ -4877,7 +4877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1022497278443607873, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -32.42
+      value: -25.419998
       objectReference: {fileID: 0}
     - target: {fileID: 1022497278443607873, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4979,6 +4979,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8492509272320255162, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: loadout.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492509272320255162, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: 'loadout.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 08155e249edb7414796adadf900a2382, type: 2}
     - target: {fileID: 8961229792895477777, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: col
       value: 
@@ -5003,6 +5011,14 @@ PrefabInstance:
       propertyPath: sprintModifier
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8961229792895477777, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: loadout.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8961229792895477777, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: 'loadout.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 08155e249edb7414796adadf900a2382, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -68301,6 +68317,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3518148564210700113, guid: 93b4ad7228ca75548b9204ef199fa5c3, type: 3}
+      propertyPath: properties.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518148564210700113, guid: 93b4ad7228ca75548b9204ef199fa5c3, type: 3}
+      propertyPath: 'properties.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d5129231789b654cae23738fa1db840, type: 2}
     - target: {fileID: 9033537802351445999, guid: 93b4ad7228ca75548b9204ef199fa5c3, type: 3}
       propertyPath: m_Name
       value: Rabbit
