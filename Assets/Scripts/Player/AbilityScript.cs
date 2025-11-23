@@ -17,7 +17,11 @@ public class AbilityScript : MonoBehaviour
     public PhysicsMaterial newMaterial;
     public PhysicsMaterial oldMaterial;
 
+    [Header("Objects")]
+    public GameObject shieldPrefab;
     public AudioClip hornSound;
+
+
     public void Start()
     {
 
@@ -79,9 +83,9 @@ public class AbilityScript : MonoBehaviour
         }
         else if (propertyManager.properties[0].name == "Shield")
         {
-            playerScript.col.sharedMaterial = newMaterial;
+            GameObject shield = Instantiate(shieldPrefab, transform);
             abilityImage.sprite = propertyManager.properties[0].icon;
-            Invoke("resetShield", 3f);
+            Invoke("resetShield", 20f);
         }else if (propertyManager.properties[0].name == "Automatic")
         {
             weaponScript.Equip(1);
@@ -136,7 +140,11 @@ public class AbilityScript : MonoBehaviour
 
     void resetShield()
     {
-        playerScript.col.sharedMaterial = oldMaterial;
+        Transform shield = transform.Find("shieldPlayer");
+        if (shield != null)
+        {
+            Destroy(shield.gameObject);
+        }
         //propertyManager.RemoveProperty(propertyManager.properties[0]);
         abilityImage.sprite = null;
     }

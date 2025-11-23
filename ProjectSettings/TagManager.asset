@@ -5,6 +5,23 @@ TagManager:
   serializedVersion: 3
   tags:
   - Projectile
+  - MuzzleFlash
+  - GODaniel
+  - Text
+  - HUD
+  - CD
+  - AbiCDIsActive
+  - AbiCDText
+  - Daniel
+  - CDText
+  - AbiCD
+  - Healthbar
+  - Sprint
+  - Mouse
+  - OliAbi
+  - Tabfeed
+  - Tab
+  - TechnikerUI
   layers:
   - Default
   - TransparentFX
@@ -15,10 +32,10 @@ TagManager:
   - Enemy
   - Player
   - Wall
-  - 
-  - 
-  - 
-  - 
+  - Shield Enemy
+  - Shield Player
+  - Projectile Enemy
+  - Projectile Player
   - 
   - 
   - 

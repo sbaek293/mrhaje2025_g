@@ -5,7 +5,7 @@ public class EnemyFollowAI : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform player;
-    public LayerMask whatIsGround, whatIsPlayer;
+    public LayerMask whatIsGround, whatIsPlayer, ignoredLayers;
 
     // Patroling
     public Vector3 walkPoint;
@@ -52,8 +52,10 @@ public class EnemyFollowAI : MonoBehaviour
         // Check if player is within FOV angle and range
         if (angleToPlayer < fieldOfView / 2f)
         {
+            int mask = ~ignoredLayers;
+
             // Then check if nothing is blocking view
-            if (Physics.Raycast(transform.position, directionToPlayer, out RaycastHit hit, range))
+            if (Physics.Raycast(transform.position, directionToPlayer, out RaycastHit hit, range, mask))
             {
                 if (hit.transform == player)
                     return true;

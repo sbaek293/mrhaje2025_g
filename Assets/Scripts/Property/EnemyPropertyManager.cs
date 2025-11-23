@@ -35,6 +35,13 @@ public class EnemyPropertyManager : PropertyManager
         } else if (propData.name == "Heavy")
         {
             gameObject.GetComponent<Rigidbody>().mass = 0.2f;
+        } else if (propData.name == "Shield")
+        {
+            Transform shield = transform.Find("shield");
+            if (shield != null)
+            {
+                Destroy(shield.gameObject);
+            }
         }
     }
 }
