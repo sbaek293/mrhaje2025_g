@@ -85,6 +85,7 @@ public class Player : MonoBehaviour
     public PauseScript pauseScript;
     public bool touchingWall = false;
     public Transform spawnPoint;
+    public GameObject playerDecoy;
 
     [Header("SFX")]
     public AudioClip jump;

@@ -161,7 +161,7 @@ public class AutoTargetHaking : MonoBehaviour
                         propertyUIContainer.transform.GetChild(newIndex).GetComponent<EnemyPropertyUINodeInterect>().Enlarge(1.2f);
                         selectedNodeIndex = newIndex;
 
-                        Debug.LogWarning($"angle : {angle}, newIndex : {newIndex}, enemyContainer.childCount : {enemyContainer.childCount}");
+                        //Debug.LogWarning($"angle : {angle}, newIndex : {newIndex}, enemyContainer.childCount : {enemyContainer.childCount}");
                     }
                 }
             }

@@ -28,13 +28,13 @@ public class Projectile : MonoBehaviour
             
     private void OnCollisionEnter(Collision other)
     {
-        Debug.LogWarning($"Layer : {other.gameObject.layer}");
-        if (((1 << other.gameObject.layer) & destroyLayer) != 0)
+        //Debug.LogWarning($"other.collider.gameObject.layer : {other.collider.gameObject.layer}");
+        if (((1 << other.collider.gameObject.layer) & destroyLayer) != 0)
         {
-            Debug.LogWarning("Projectile이 Destroyable에 부딫혀 삭제됨");
+            //Debug.LogWarning("Projectile이 Destroyable에 부딫혀 삭제됨");
             Destroy(gameObject);
         }
-        else if (other.gameObject.CompareTag("Player"))
+        else if (other.collider.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<Player>().TakeDamage(damage, false, 0);
             Destroy(gameObject);

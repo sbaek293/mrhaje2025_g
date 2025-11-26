@@ -20,6 +20,7 @@ public class AbilityScript : MonoBehaviour
     [Header("Objects")]
     public GameObject shieldPrefab;
     public AudioClip hornSound;
+    public GameObject playerDecoyPrefab;
 
 
     public void Start()
@@ -86,11 +87,18 @@ public class AbilityScript : MonoBehaviour
             GameObject shield = Instantiate(shieldPrefab, transform);
             abilityImage.sprite = propertyManager.properties[0].icon;
             Invoke("resetShield", 20f);
-        }else if (propertyManager.properties[0].name == "Automatic")
+        }
+        else if (propertyManager.properties[0].name == "Automatic")
         {
             weaponScript.Equip(1);
             abilityImage.sprite = propertyManager.properties[0].icon;
             Invoke("resetAuto", 7f);
+        }
+        else if (propertyManager.properties[0].name == "Decoy")
+        {
+            transform.GetComponent<Player>().playerDecoy = Instantiate(playerDecoyPrefab, transform.position, transform.rotation);
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            Invoke("resetDecoy", 10f);
         }
     }
 
@@ -152,6 +160,13 @@ public class AbilityScript : MonoBehaviour
     void resetAuto()
     {
         weaponScript.Equip(0);
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        abilityImage.sprite = null;
+    }
+
+    void resetDecoy()
+    {
+        Destroy(transform.GetComponent<Player>().playerDecoy);
         //propertyManager.RemoveProperty(propertyManager.properties[0]);
         abilityImage.sprite = null;
     }

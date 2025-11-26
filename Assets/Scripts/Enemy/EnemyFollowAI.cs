@@ -24,6 +24,9 @@ public class EnemyFollowAI : MonoBehaviour
     public float fieldOfView = 90f; // FOV in degrees
     public bool playerInSightRange, playerInAttackRange;
 
+    private Transform target;
+
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -46,18 +49,38 @@ public class EnemyFollowAI : MonoBehaviour
 
     private bool IsPlayerInFOV(float range)
     {
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-        float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+        if (player.GetComponent<Player>().playerDecoy != null)
+        {
+            if (isTargetInFOV(range, player.GetComponent<Player>().playerDecoy.transform))
+            {
+                target = player.GetComponent<Player>().playerDecoy.transform;
+                return true;
+            }
+        }
+        if (isTargetInFOV(range, player))
+        {
+            target = player;
+            return true;
+        }
+
+        target = null;
+        return false;
+    }
+
+    private bool isTargetInFOV(float range, Transform fovtarget)
+    {
+        Vector3 directionToTarget = (fovtarget.position - transform.position).normalized;
+        float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
 
         // Check if player is within FOV angle and range
-        if (angleToPlayer < fieldOfView / 2f)
+        if (angleToTarget < fieldOfView / 2f)
         {
             int mask = ~ignoredLayers;
 
             // Then check if nothing is blocking view
-            if (Physics.Raycast(transform.position, directionToPlayer, out RaycastHit hit, range, mask))
+            if (Physics.Raycast(transform.position, directionToTarget, out RaycastHit hit, range, mask))
             {
-                if (hit.transform == player)
+                if (hit.transform == fovtarget)
                     return true;
             }
         }
@@ -90,13 +113,16 @@ public class EnemyFollowAI : MonoBehaviour
 
     private void ChasePlayer()
     {
-        agent.SetDestination(player.position);
+        if (target == null) return;
+        agent.SetDestination(target.position);
     }
 
     private void AttackPlayer()
     {
+        if (target == null) return;
+
         agent.SetDestination(transform.position);
-        transform.LookAt(player);
+        transform.LookAt(target);
 
         if (!alreadyAttacked)
         {
