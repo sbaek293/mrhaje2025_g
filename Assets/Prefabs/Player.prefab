@@ -604,6 +604,7 @@ MonoBehaviour:
   pauseScript: {fileID: 0}
   touchingWall: 0
   spawnPoint: {fileID: 0}
+  playerDecoy: {fileID: 0}
   jump: {fileID: 0}
   land: {fileID: 0}
   dmgTaken: {fileID: 0}
@@ -644,6 +645,8 @@ MonoBehaviour:
   cam: {fileID: 6162425749606664696}
   loadout:
   - {fileID: 11400000, guid: e0e725d3dae445f488f0fbdfadeb78e4, type: 2}
+  - {fileID: 11400000, guid: 08155e249edb7414796adadf900a2382, type: 2}
+  - {fileID: 11400000, guid: 080571aa68615ce4f9bcc50c36f5ec08, type: 2}
   weaponParent: {fileID: 1541600524758887682}
   canBeShot:
     serializedVersion: 2
@@ -757,3 +760,5 @@ MonoBehaviour:
   oldMaterial: {fileID: 0}
   shieldPrefab: {fileID: 6968334685882507671, guid: 2309860cbc1466d438804d301642d8b8, type: 3}
   hornSound: {fileID: 8300000, guid: f46cc5add35647148b880069d8aff744, type: 3}
+  playerDecoyPrefab: {fileID: 7849319359021052013, guid: 46e2c686e163e6c46af619b7a13836f8, type: 3}
+  marionettePrefab: {fileID: 2989810529613765013, guid: aa1ad2478cec6c64baed104fcf933052, type: 3}

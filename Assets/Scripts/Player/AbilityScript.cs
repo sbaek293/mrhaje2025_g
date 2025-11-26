@@ -21,6 +21,7 @@ public class AbilityScript : MonoBehaviour
     public GameObject shieldPrefab;
     public AudioClip hornSound;
     public GameObject playerDecoyPrefab;
+    public GameObject marionettePrefab;
 
 
     public void Start()
@@ -100,6 +101,12 @@ public class AbilityScript : MonoBehaviour
             abilityImage.sprite = propertyManager.properties[0].icon;
             Invoke("resetDecoy", 10f);
         }
+        else if (propertyManager.properties[0].name == "Marionette")
+        {
+            weaponScript.Equip(2);
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            Invoke("resetMarionette", 120f);
+        }
     }
 
     void resetJumpForce()
@@ -167,6 +174,12 @@ public class AbilityScript : MonoBehaviour
     void resetDecoy()
     {
         Destroy(transform.GetComponent<Player>().playerDecoy);
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        abilityImage.sprite = null;
+    }
+
+    void resetMarionette()
+    {
         //propertyManager.RemoveProperty(propertyManager.properties[0]);
         abilityImage.sprite = null;
     }

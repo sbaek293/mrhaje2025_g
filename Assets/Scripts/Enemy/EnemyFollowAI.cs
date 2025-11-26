@@ -18,6 +18,7 @@ public class EnemyFollowAI : MonoBehaviour
     public GameObject projectile;
     public float attackForceForward;
     public float attackForceUp;
+    public bool is_friend = false;
 
     // States
     public float sightRange, attackRange;
@@ -49,18 +50,48 @@ public class EnemyFollowAI : MonoBehaviour
 
     private bool IsPlayerInFOV(float range)
     {
-        if (player.GetComponent<Player>().playerDecoy != null)
+        if (!is_friend)
         {
-            if (isTargetInFOV(range, player.GetComponent<Player>().playerDecoy.transform))
+            if (isTargetInFOV(range, player))
             {
-                target = player.GetComponent<Player>().playerDecoy.transform;
+                target = player;
                 return true;
             }
         }
-        if (isTargetInFOV(range, player))
+
+        Transform enemyContainer = transform.parent;
+
+        if (enemyContainer != null)
         {
-            target = player;
-            return true;
+            foreach (Transform enemy in enemyContainer)
+            {
+                if (enemy == transform || enemy.GetComponent<EnemyFollowAI>() == null)
+                {
+                    continue;
+                }
+
+                if (is_friend ^ enemy.GetComponent<EnemyFollowAI>().is_friend)
+                {
+                    if (isTargetInFOV(range, enemy.transform))
+                    {
+                        target = enemy.transform;
+                        return true;
+                    }
+                }
+            }
+        }
+
+        if (!is_friend)
+        {
+            if (player.GetComponent<Player>().playerDecoy != null)
+            {
+                if (isTargetInFOV(range, player.GetComponent<Player>().playerDecoy.transform))
+                {
+                    target = player.GetComponent<Player>().playerDecoy.transform;
+                    return true;
+                }
+            }
+            
         }
 
         target = null;
@@ -126,7 +157,9 @@ public class EnemyFollowAI : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            GameObject temp_proj = Instantiate(projectile, transform.position, Quaternion.identity);
+            temp_proj.GetComponent<Projectile>().is_friendly = is_friend;
+            Rigidbody rb = temp_proj.GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * attackForceForward, ForceMode.Impulse);
             rb.AddForce(transform.up * attackForceUp, ForceMode.Impulse);
 

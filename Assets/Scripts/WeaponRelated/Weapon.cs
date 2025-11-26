@@ -127,53 +127,72 @@ public class Weapon : MonoBehaviour
     void Shoot()
     {
         
-            if (muzzleFlash == null)
-                muzzleFlash = gameObject.transform.Find("Weapon/" + currentWeapon.name + "/Anchor/Design/Barrel/Particle System").GetComponent<ParticleSystem>();
-            muzzleFlash.Play();
+        if (muzzleFlash == null)
+            muzzleFlash = gameObject.transform.Find("Weapon/" + currentWeapon.name + "/Anchor/Design/Barrel/Particle System").GetComponent<ParticleSystem>();
+        muzzleFlash.Play();
 
-            Transform t_spawn = transform.Find("Main Camera");
+        Transform t_spawn = transform.Find("Main Camera");
 
-            // bloom
-            Vector3 t_bloom = t_spawn.position + t_spawn.forward * 1000f;
+        // bloom
+        Vector3 t_bloom = t_spawn.position + t_spawn.forward * 1000f;
 
-            t_bloom += Random.Range(-loadout[currentIndex].bloom, loadout[currentIndex].bloom) * t_spawn.up;
-            t_bloom += Random.Range(-loadout[currentIndex].bloom, loadout[currentIndex].bloom) * t_spawn.right;
-            t_bloom -= t_spawn.position;
-            t_bloom.Normalize();
+        t_bloom += Random.Range(-loadout[currentIndex].bloom, loadout[currentIndex].bloom) * t_spawn.up;
+        t_bloom += Random.Range(-loadout[currentIndex].bloom, loadout[currentIndex].bloom) * t_spawn.right;
+        t_bloom -= t_spawn.position;
+        t_bloom.Normalize();
 
-            //cooldown
+        //cooldown
 
-            currentCooldown = fireRate;
+        currentCooldown = fireRate;
 
 
-            //raycast
-            RaycastHit t_hit = new RaycastHit();
+        //raycast
+        RaycastHit t_hit = new RaycastHit();
 
-            if (Physics.Raycast(t_spawn.position, t_bloom, out t_hit, range, canBeShot))
+        if (Physics.Raycast(t_spawn.position, t_bloom, out t_hit, range, canBeShot))
+        {
+            GameObject t_newHole = Instantiate(loadout[currentIndex].bulletHole, t_hit.point + t_hit.normal * 0.001f, Quaternion.identity) as GameObject;
+            t_newHole.transform.LookAt(t_hit.point + t_hit.normal);
+
+            Destroy(t_newHole, 2.5f);
+
+            if (t_hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth T))
             {
-                GameObject t_newHole = Instantiate(loadout[currentIndex].bulletHole, t_hit.point + t_hit.normal * 0.001f, Quaternion.identity) as GameObject;
-                t_newHole.transform.LookAt(t_hit.point + t_hit.normal);
-
-                Destroy(t_newHole, 2.5f);
-
-                if (t_hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth T))
+                if (t_hit.transform.TryGetComponent<EnemyFollowAI>(out EnemyFollowAI enemyFollow))
                 {
+                    if (!enemyFollow.is_friend) {
                         T.TakeDamage(damage);
                         t_newHole.transform.parent = t_hit.collider.gameObject.transform;
                         //Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
                         Destroy(t_newHole, 0.5f);
+
+                        //Debug.LogWarning($"현재 무기는 {loadout[currentIndex].name}입니다.");
+                        if (loadout[currentIndex].name == "Marionette")
+                        {
+                            enemyFollow.is_friend = true;
+                            GameObject marionetteSign = Instantiate(transform.GetComponent<AbilityScript>().marionettePrefab, t_hit.transform);
+                            marionetteSign.transform.localPosition = new Vector3(0, 1, 0);
+                            Equip(0);
+                        }
+                    }
+                } else
+                {
+                    T.TakeDamage(damage);
+                    t_newHole.transform.parent = t_hit.collider.gameObject.transform;
+                    //Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
+                    Destroy(t_newHole, 0.5f);
                 }
             }
+        }
 
-            //sound
-            //sfx.Stop();
-            //sfx.clip = loadout[currentIndex].gunshotSound;
-            //sfx.pitch = 1 - loadout[currentIndex].pitchRandomization + Random.Range(-loadout[currentIndex].pitchRandomization, loadout[currentIndex].pitchRandomization);
-            //sfx.Play();
+        //sound
+        //sfx.Stop();
+        //sfx.clip = loadout[currentIndex].gunshotSound;
+        //sfx.pitch = 1 - loadout[currentIndex].pitchRandomization + Random.Range(-loadout[currentIndex].pitchRandomization, loadout[currentIndex].pitchRandomization);
+        //sfx.Play();
             
-            //gun fx
-            currentWeapon.transform.Rotate(-loadout[currentIndex].recoil, 0, 0);
-        
+        //gun fx
+        currentWeapon.transform.Rotate(-loadout[currentIndex].recoil, 0, 0);
     }
     //public void Attack()
     //{
