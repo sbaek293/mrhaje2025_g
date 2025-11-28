@@ -162,18 +162,19 @@ public class Weapon : MonoBehaviour
                 {
                     if (!enemyFollow.is_friend) {
                         T.TakeDamage(damage);
-                        t_newHole.transform.parent = t_hit.collider.gameObject.transform;
-                        //Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
-                        Destroy(t_newHole, 0.5f);
+                    }
 
-                        //Debug.LogWarning($"현재 무기는 {loadout[currentIndex].name}입니다.");
-                        if (loadout[currentIndex].name == "Marionette")
-                        {
-                            enemyFollow.is_friend = true;
-                            GameObject marionetteSign = Instantiate(transform.GetComponent<AbilityScript>().marionettePrefab, t_hit.transform);
-                            marionetteSign.transform.localPosition = new Vector3(0, 1, 0);
-                            Equip(0);
-                        }
+                    t_newHole.transform.parent = t_hit.collider.gameObject.transform;
+                    //Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
+                    Destroy(t_newHole, 0.5f);
+
+                    if (loadout[currentIndex].name == "Marionette")
+                    {
+                        enemyFollow.BeMarionette();
+                        GameObject marionetteSign = Instantiate(transform.GetComponent<AbilityScript>().marionettePrefab, t_hit.transform);
+                        marionetteSign.transform.localPosition = new Vector3(0, 1, 0);
+
+                        Equip(0);
                     }
                 } else
                 {

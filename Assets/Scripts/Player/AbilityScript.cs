@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class AbilityScript : MonoBehaviour
 {
+    [Header("References")]
     public PropertyManager propertyManager;
     public Player playerScript;
     public Weapon weaponScript;
+    public Transform enemyContainer;
 
     private float org_jump;
     private float org_speed;
@@ -24,6 +26,7 @@ public class AbilityScript : MonoBehaviour
     public GameObject marionettePrefab;
 
 
+
     public void Start()
     {
 
@@ -32,7 +35,7 @@ public class AbilityScript : MonoBehaviour
     {
         if (Input.GetKeyDown("e"))
         {
-            Ability();
+            if (!GetComponent<ChangeWorld>().inCodeWorld()) Ability();
         }
     }
     public void FixedUpdate()
@@ -97,14 +100,17 @@ public class AbilityScript : MonoBehaviour
         }
         else if (propertyManager.properties[0].name == "Decoy")
         {
-            transform.GetComponent<Player>().playerDecoy = Instantiate(playerDecoyPrefab, transform.position, transform.rotation);
+            GameObject temp_decop = Instantiate(playerDecoyPrefab, enemyContainer);
+            temp_decop.transform.position = transform.position;
             abilityImage.sprite = propertyManager.properties[0].icon;
+            propertyManager.RemoveProperty(propertyManager.properties[0]);
             Invoke("resetDecoy", 10f);
         }
         else if (propertyManager.properties[0].name == "Marionette")
         {
             weaponScript.Equip(2);
             abilityImage.sprite = propertyManager.properties[0].icon;
+            propertyManager.RemoveProperty(propertyManager.properties[0]);
             Invoke("resetMarionette", 120f);
         }
     }
@@ -173,7 +179,6 @@ public class AbilityScript : MonoBehaviour
 
     void resetDecoy()
     {
-        Destroy(transform.GetComponent<Player>().playerDecoy);
         //propertyManager.RemoveProperty(propertyManager.properties[0]);
         abilityImage.sprite = null;
     }

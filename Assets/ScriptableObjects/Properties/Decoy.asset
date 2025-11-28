@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f5ca811da12ccb439f39358c26ce97a, type: 3}
   m_Name: Decoy
   m_EditorClassIdentifier: 
-  propertyName: Shield
-  description: Save your health
+  propertyName: Decoy
+  description: Make impressive clone of you
   maxDuration: 300
-  duration: 280.4375
-  icon: {fileID: 21300000, guid: d1077eac4170da645a77af68d8b75223, type: 3}
+  duration: 274.56213
+  icon: {fileID: 21300000, guid: e4db347b8ccece04493c12d6ca2a9ea5, type: 3}

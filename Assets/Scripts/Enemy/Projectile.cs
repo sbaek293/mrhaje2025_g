@@ -39,7 +39,12 @@ public class Projectile : MonoBehaviour
         }
         else if (other.collider.gameObject.layer == 6) // 6 == enemy layer
         {
-            if (is_friendly ^ other.collider.gameObject.GetComponent<EnemyFollowAI>().is_friend)
+            if (other.gameObject.GetComponent<EnemyFollowAI>() == null)
+            {
+                Debug.LogWarning($"AI is null : {other.gameObject}");
+                return;
+            }
+            if (is_friendly ^ other.gameObject.GetComponent<EnemyFollowAI>().is_friend)
             {
                 other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
                 Destroy(gameObject);

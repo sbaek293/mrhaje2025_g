@@ -111,9 +111,8 @@ public class AutoTargetHaking : MonoBehaviour
 
             ClearTargetUI();
 
-            if (closestEnemy != null)
+            if (closestEnemy != null && closestEnemy.GetComponent<EnemyPropertyManager>() != null)
             {
-
                 GameObject targetUIInstance = Instantiate(autoTargetPrefab, autoTargetUIContainer.transform);
                 UIFollowTarget uiFollowTarget = targetUIInstance.GetComponentInChildren<UIFollowTarget>();
                 uiFollowTarget.target = closestEnemy;

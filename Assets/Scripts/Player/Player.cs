@@ -1,15 +1,7 @@
-using NUnit.Framework.Internal;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using URPGlitch;
-using static UnityEngine.Rendering.DebugUI;
 
 
 
@@ -39,7 +31,7 @@ public class Player : MonoBehaviour
     Vector3 curPos;
     private float t_adjustedSpeed;
     public float originalSpeed;
-    private float speed;
+    public float speed;
     public float sprintModifier;
     public float jumpForce;
     public int max_health;
@@ -65,7 +57,6 @@ public class Player : MonoBehaviour
     private Vector3 targetWeaponBobPosition;
     private Vector3 weaponParentOrigin;
     public Transform weaponParent;
-    public WeaponStats[] loadout;
 
     [Header("Camera")]
     public Camera normalCam;
@@ -85,7 +76,6 @@ public class Player : MonoBehaviour
     public PauseScript pauseScript;
     public bool touchingWall = false;
     public Transform spawnPoint;
-    public GameObject playerDecoy;
 
     [Header("SFX")]
     public AudioClip jump;
@@ -103,6 +93,7 @@ public class Player : MonoBehaviour
     {
         current_health = max_health;
         baseFOV = normalCam.fieldOfView;
+        speed = originalSpeed;
 
         //if (Camera.main) Camera.main.enabled = false;
 
@@ -246,7 +237,7 @@ public class Player : MonoBehaviour
                 Vector3 t_direction = new Vector3(t_hmove, 0, t_vmove);
                 t_direction.Normalize();
 
-                t_adjustedSpeed = originalSpeed;
+                t_adjustedSpeed = speed;
                 if (isSprinting) t_adjustedSpeed *= sprintModifier;
 
                 Vector3 t_targetVelocity = transform.TransformDirection(t_direction) * t_adjustedSpeed * Time.fixedDeltaTime;
@@ -255,8 +246,8 @@ public class Player : MonoBehaviour
             }
             else if (movementType == "truck")
             {
-                t_adjustedSpeed += originalSpeed*1.5f * Time.fixedDeltaTime;
-                t_adjustedSpeed = Mathf.Clamp(t_adjustedSpeed, 0, originalSpeed*6);
+                t_adjustedSpeed += speed*1.5f * Time.fixedDeltaTime;
+                t_adjustedSpeed = Mathf.Clamp(t_adjustedSpeed, 0, speed*6);
 
                 Vector3 forwardVelocity = transform.forward * t_adjustedSpeed * Time.fixedDeltaTime;
                 forwardVelocity.y = rig.linearVelocity.y;
@@ -298,7 +289,7 @@ public class Player : MonoBehaviour
 
     void RefreshCD()
     {
-        float cd_ratio = weapon.currentCooldown / loadout[weapon.currentIndex].firerate;
+        float cd_ratio = weapon.currentCooldown / weapon.loadout[weapon.currentIndex].firerate;
 
         CDImage.fillAmount = Mathf.Lerp(CDImage.fillAmount, cd_ratio, Time.fixedDeltaTime * 8f);
 

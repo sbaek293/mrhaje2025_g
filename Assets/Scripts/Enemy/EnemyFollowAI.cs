@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,7 +26,15 @@ public class EnemyFollowAI : MonoBehaviour
     public float fieldOfView = 90f; // FOV in degrees
     public bool playerInSightRange, playerInAttackRange;
 
+    public bool disabled = false;
+
     private Transform target;
+
+    // For Stop at Code World
+    private bool paused = false;
+
+    void OnEnable() => ChangeWorld.OnChangeWorld += HandleChangeWorld;
+    void OnDisable() => ChangeWorld.OnChangeWorld -= HandleChangeWorld;
 
 
     private void Awake()
@@ -36,7 +45,7 @@ public class EnemyFollowAI : MonoBehaviour
 
     void Update()
     {
-        if (PauseScript.paused || ChangeWorld.isInMatrix)
+        if (paused || disabled)
             return;
 
         // Check ranges
@@ -50,15 +59,6 @@ public class EnemyFollowAI : MonoBehaviour
 
     private bool IsPlayerInFOV(float range)
     {
-        if (!is_friend)
-        {
-            if (isTargetInFOV(range, player))
-            {
-                target = player;
-                return true;
-            }
-        }
-
         Transform enemyContainer = transform.parent;
 
         if (enemyContainer != null)
@@ -67,7 +67,7 @@ public class EnemyFollowAI : MonoBehaviour
             {
                 if (enemy == transform || enemy.GetComponent<EnemyFollowAI>() == null)
                 {
-                    continue;
+                    continue; //skip self
                 }
 
                 if (is_friend ^ enemy.GetComponent<EnemyFollowAI>().is_friend)
@@ -83,15 +83,11 @@ public class EnemyFollowAI : MonoBehaviour
 
         if (!is_friend)
         {
-            if (player.GetComponent<Player>().playerDecoy != null)
+            if (isTargetInFOV(range, player))
             {
-                if (isTargetInFOV(range, player.GetComponent<Player>().playerDecoy.transform))
-                {
-                    target = player.GetComponent<Player>().playerDecoy.transform;
-                    return true;
-                }
+                target = player;
+                return true;
             }
-            
         }
 
         target = null;
@@ -198,6 +194,29 @@ public class EnemyFollowAI : MonoBehaviour
         UnityEditor.Handles.color = new Color(0f, 0.5f, 1f, 0.2f);
         UnityEditor.Handles.DrawSolidArc(transform.position, Vector3.up, leftBoundary.normalized, fieldOfView, sightRange);
 #endif
+    }
+
+    void HandleChangeWorld(int _currentWorld)
+    {
+        Rigidbody rig = GetComponent<Rigidbody>();
+
+        if (_currentWorld == 1) // save kinetic datas
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+            paused = true;
+        }
+        else // return to kinetic state
+        {
+            agent.isStopped = false;
+            paused = false;
+        }
+    }
+
+    public void BeMarionette()
+    {
+        is_friend = true;
+        disabled = false;
     }
 
 }
