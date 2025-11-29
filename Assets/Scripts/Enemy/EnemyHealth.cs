@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -23,7 +24,10 @@ public class EnemyHealth : MonoBehaviour
         renderer.enabled = false;
         renderer.enabled = true;
         Invoke("changeMaterial", 1f);
-        currentHealth -= amount;
+
+        if(GetComponent<EnemyPropertyManager>().HasPropertyName("Hardening")) currentHealth -= (int)(amount*0.2f);
+        else currentHealth -= amount;
+
         if (currentHealth <= 0)
         { Death(); }
     }

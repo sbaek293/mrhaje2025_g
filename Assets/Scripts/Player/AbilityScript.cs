@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,9 +18,12 @@ public class AbilityScript : MonoBehaviour
     public PhysicsMaterial newMaterial;
     public PhysicsMaterial oldMaterial;
 
+    public float blinkDistance=10;
+
     [Header("Objects")]
     public GameObject shieldPrefab;
     public AudioClip hornSound;
+
 
 
     public void Start()
@@ -86,11 +90,30 @@ public class AbilityScript : MonoBehaviour
             GameObject shield = Instantiate(shieldPrefab, transform);
             abilityImage.sprite = propertyManager.properties[0].icon;
             Invoke("resetShield", 20f);
-        }else if (propertyManager.properties[0].name == "Automatic")
+        }
+        else if (propertyManager.properties[0].name == "Automatic")
         {
             weaponScript.Equip(1);
             abilityImage.sprite = propertyManager.properties[0].icon;
             Invoke("resetAuto", 7f);
+        }
+        else if (propertyManager.properties[0].name == "Blink")
+        {
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            float t_hmove = Input.GetAxisRaw("Horizontal");
+            float t_vmove = Input.GetAxisRaw("Vertical");
+            Vector3 dir = new Vector3(t_hmove, 0, t_vmove).normalized;
+            if(dir.magnitude==0) dir = new Vector3(0,0,1);
+            Vector3 diff = dir * blinkDistance;
+            transform.position = transform.position + transform.TransformDirection(diff);
+            Invoke("resetBlink", 3f);
+        }
+        else if (propertyManager.properties[0].name == "Hardening")
+        {
+            playerScript.hardening = true;
+            org_speed = playerScript.originalSpeed;
+            playerScript.originalSpeed *= 0.2f;
+            Invoke("resetHardening", 3f);
         }
     }
 
@@ -152,6 +175,19 @@ public class AbilityScript : MonoBehaviour
     void resetAuto()
     {
         weaponScript.Equip(0);
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        abilityImage.sprite = null;
+    }
+    void resetBlink()
+    {
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        abilityImage.sprite = null;
+    }
+
+    void resetHardening()
+    {
+        playerScript.hardening = false;
+        playerScript.originalSpeed = org_speed;
         //propertyManager.RemoveProperty(propertyManager.properties[0]);
         abilityImage.sprite = null;
     }

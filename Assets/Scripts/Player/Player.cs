@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
     public float originalWeight;
     public String movementType = "normal";
     public bool stunned = false;
+    public bool hardening = false;
 
 
     [Header("UI")]
@@ -311,8 +312,9 @@ public class Player : MonoBehaviour
     {
         //Stamina.Instance.Recover(Stamina.StaminaEventType.TakeDamage);
 
-        
-        current_health -= damage;
+        if (hardening) current_health -= (int)(damage * 0.2f);
+        else current_health -= damage;
+
         RefreshHealthBar();
         //PlaySound("DMG");
         damaged = true;
