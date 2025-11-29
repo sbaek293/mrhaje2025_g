@@ -579,9 +579,12 @@ MonoBehaviour:
   max_health: 100
   current_health: 0
   regen: 0
-  originalWeight: 0
+  originalWeight: 3
   movementType: normal
   stunned: 0
+  lavitating: 0
+  maxLavitateSpeed: 10
+  lavitatingForce: 18
   dmgTakenPanel: {fileID: 0}
   CDText: {fileID: 0}
   CDImage: {fileID: 0}
@@ -654,6 +657,7 @@ MonoBehaviour:
   currentCooldown: 0
   currentIndex: 0
   playerScript: {fileID: 8961229792895477777}
+  CanonCopyNum: 1
   muzzleFlash: {fileID: 0}
 --- !u!114 &4276371079233385056
 MonoBehaviour:
@@ -762,3 +766,5 @@ MonoBehaviour:
   hornSound: {fileID: 8300000, guid: f46cc5add35647148b880069d8aff744, type: 3}
   playerDecoyPrefab: {fileID: 7849319359021052013, guid: 46e2c686e163e6c46af619b7a13836f8, type: 3}
   marionettePrefab: {fileID: 2989810529613765013, guid: aa1ad2478cec6c64baed104fcf933052, type: 3}
+  playerMaterial: {fileID: 13400000, guid: ab81a49ce32c4764aaa61c670ea99999, type: 2}
+  bouncyMaterial: {fileID: 13400000, guid: 1ec959eecafeb1d4aa60a58f5a9705a0, type: 2}

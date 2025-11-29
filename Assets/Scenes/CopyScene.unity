@@ -3609,6 +3609,10 @@ PrefabInstance:
       propertyPath: propertiesContainer
       value: 
       objectReference: {fileID: 1030939494}
+    - target: {fileID: 5227229518561192596, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: ab81a49ce32c4764aaa61c670ea99999, type: 2}
     - target: {fileID: 5701874381155054624, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: staminaBar
       value: 
@@ -3622,9 +3626,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 410032800}
     - target: {fileID: 5931604676491082651, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: bouncyMaterial
+      value: 
+      objectReference: {fileID: 13400000, guid: 1ec959eecafeb1d4aa60a58f5a9705a0, type: 2}
+    - target: {fileID: 5931604676491082651, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: enemyContainer
       value: 
       objectReference: {fileID: 1409798297}
+    - target: {fileID: 5931604676491082651, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: playerMaterial
+      value: 
+      objectReference: {fileID: 13400000, guid: ab81a49ce32c4764aaa61c670ea99999, type: 2}
     - target: {fileID: 5931604676491082651, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: propertyManager
       value: 
@@ -3661,6 +3673,10 @@ PrefabInstance:
       propertyPath: dmgTakenPanel
       value: 
       objectReference: {fileID: 1819323367}
+    - target: {fileID: 8961229792895477777, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: originalWeight
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -56983,12 +56999,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3518148564210700113, guid: 93b4ad7228ca75548b9204ef199fa5c3, type: 3}
       propertyPath: properties.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3518148564210700113, guid: 93b4ad7228ca75548b9204ef199fa5c3, type: 3}
       propertyPath: 'properties.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: 6c00346b6aaf51e459fa2c16a76d2c82, type: 2}
+    - target: {fileID: 3518148564210700113, guid: 93b4ad7228ca75548b9204ef199fa5c3, type: 3}
+      propertyPath: 'properties.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e83fe6efc153824db6e89d48b5ab7a2, type: 2}
+    - target: {fileID: 3518148564210700113, guid: 93b4ad7228ca75548b9204ef199fa5c3, type: 3}
+      propertyPath: 'properties.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f8bd322586e1b047a0699a381ec4372, type: 2}
     - target: {fileID: 9033537802351445999, guid: 93b4ad7228ca75548b9204ef199fa5c3, type: 3}
       propertyPath: m_Name
       value: Rabbit

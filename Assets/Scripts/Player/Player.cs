@@ -37,9 +37,12 @@ public class Player : MonoBehaviour
     public int max_health;
     public float current_health;
     public float regen;
-    public float originalWeight;
+    public float originalWeight = 3;
     public String movementType = "normal";
     public bool stunned = false;
+    public bool lavitating = false;
+    public float maxLavitateSpeed = 10f;
+    public float lavitatingForce = 18f;
 
 
     [Header("UI")]
@@ -230,7 +233,7 @@ public class Player : MonoBehaviour
 
 
         //Movement
-        if (isGrounded || !touchingWall || !stunned)
+        if ((isGrounded || lavitating) && !touchingWall && !stunned)
         {
             if (movementType == "normal")
             {
@@ -255,6 +258,15 @@ public class Player : MonoBehaviour
                 rig.linearVelocity = forwardVelocity;
             }
             
+        }
+
+        //Lavitating
+        if (lavitating)
+        {
+            if (rig.linearVelocity.y < maxLavitateSpeed)
+            {
+                rig.AddForce(Vector3.up * lavitatingForce, ForceMode.Acceleration);
+            }
         }
 
         //FOV
@@ -321,7 +333,6 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.layer == 8)
         {
-
             touchingWall = true;
         } else if (collision.gameObject.layer == 6)
         {

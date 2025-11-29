@@ -24,6 +24,8 @@ public class AbilityScript : MonoBehaviour
     public AudioClip hornSound;
     public GameObject playerDecoyPrefab;
     public GameObject marionettePrefab;
+    public PhysicsMaterial playerMaterial;
+    public PhysicsMaterial bouncyMaterial;
 
 
 
@@ -120,6 +122,19 @@ public class AbilityScript : MonoBehaviour
             propertyManager.RemoveProperty(propertyManager.properties[0]);
             Invoke("resetCopy", 120f);
         }
+        else if (propertyManager.properties[0].name == "Bouncy")
+        {
+            GetComponent<CapsuleCollider>().material = bouncyMaterial;
+            playerScript.rig.mass = playerScript.originalWeight * 0.75f;
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            Invoke("resetBouncy", 60f);
+        }
+        else if (propertyManager.properties[0].name == "Lavitating")
+        {
+            playerScript.lavitating = true;
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            Invoke("resetLavitating", 30f);
+        }
     }
 
     void resetJumpForce()
@@ -199,6 +214,21 @@ public class AbilityScript : MonoBehaviour
     void resetCopy()
     {
         //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        abilityImage.sprite = null;
+    }
+
+    void resetBouncy()
+    {
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        GetComponent<CapsuleCollider>().material = playerMaterial;
+        playerScript.rig.mass = playerScript.originalWeight;
+        abilityImage.sprite = null;
+    }
+
+    void resetLavitating()
+    {
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        playerScript.lavitating = false;
         abilityImage.sprite = null;
     }
 }
