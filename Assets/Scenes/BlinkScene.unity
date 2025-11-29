@@ -3622,10 +3622,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 410032800}
     - target: {fileID: 5931604676491082651, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
-      propertyPath: blinkDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5931604676491082651, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: propertyManager
       value: 
       objectReference: {fileID: 1386703908}
@@ -4012,7 +4008,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 1
   m_VoxelSize: 0.05
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: da0d8ba47a386a441be33bc546533753, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 3089972d97f43ca47b1e770ac8c219a5, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &230691777
 PrefabInstance:
@@ -10247,7 +10243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -648380416258262209, guid: b331b40afd376084c8aa6c6b8ad806c2, type: 3}
       propertyPath: properties.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -648380416258262209, guid: b331b40afd376084c8aa6c6b8ad806c2, type: 3}
       propertyPath: propertyContainerPrefab
@@ -10323,19 +10319,15 @@ PrefabInstance:
       objectReference: {fileID: 1386703920}
     - target: {fileID: 7728086077187443557, guid: b331b40afd376084c8aa6c6b8ad806c2, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7728086077187443557, guid: b331b40afd376084c8aa6c6b8ad806c2, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 7748876314110832263, guid: a0a6ff3af90387b4da17b2c948125d57, type: 3}
-    - target: {fileID: 7728086077187443557, guid: b331b40afd376084c8aa6c6b8ad806c2, type: 3}
-      propertyPath: timeBetweenAttacks
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7748876314110832263, guid: c4ac115241fbac441bf0170f9ba640a2, type: 3}
     - target: {fileID: 8150654221666913365, guid: b331b40afd376084c8aa6c6b8ad806c2, type: 3}
       propertyPath: maxHealth
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

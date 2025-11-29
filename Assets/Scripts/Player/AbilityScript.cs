@@ -54,7 +54,7 @@ public class AbilityScript : MonoBehaviour
         if (propertyManager.properties[0].name == "Jump")
         {
             org_jump = playerScript.jumpForce;
-            abilityImage.sprite = propertyManager.properties[0].icon;   
+            abilityImage.sprite = propertyManager.properties[0].icon;
             playerScript.jumpForce += 700f;
             Invoke("resetJumpForce", 3f);
         }
@@ -110,7 +110,7 @@ public class AbilityScript : MonoBehaviour
             float t_hmove = Input.GetAxisRaw("Horizontal");
             float t_vmove = Input.GetAxisRaw("Vertical");
             Vector3 dir = new Vector3(t_hmove, 0, t_vmove).normalized;
-            if(dir.magnitude==0) dir = new Vector3(0,0,1);
+            if (dir.magnitude == 0) dir = new Vector3(0, 0, 1);
             Vector3 diff = dir * blinkDistance;
             transform.position = transform.position + transform.TransformDirection(diff);
             Invoke("resetBlink", 3f);
@@ -121,6 +121,7 @@ public class AbilityScript : MonoBehaviour
             org_speed = playerScript.originalSpeed;
             playerScript.originalSpeed *= 0.2f;
             Invoke("resetHardening", 3f);
+        }
         else if (propertyManager.properties[0].name == "Decoy")
         {
             GameObject temp_decop = Instantiate(playerDecoyPrefab, enemyContainer);
