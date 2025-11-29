@@ -10404,11 +10404,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7728086077187443557, guid: b331b40afd376084c8aa6c6b8ad806c2, type: 3}
       propertyPath: attackForceUp
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7728086077187443557, guid: b331b40afd376084c8aa6c6b8ad806c2, type: 3}
       propertyPath: attackForceForward
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7728086077187443557, guid: b331b40afd376084c8aa6c6b8ad806c2, type: 3}
       propertyPath: ignoredLayers.m_Bits

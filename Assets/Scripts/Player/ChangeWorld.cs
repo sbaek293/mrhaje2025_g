@@ -62,6 +62,8 @@ public class ChangeWorld : MonoBehaviour
                 StartCoroutine(WarpTransition(1));
                 shaderTest.Matrixmode = true;
                 currentWorld = 1;
+                Player player = GetComponent<Player>();
+                player.speed = player.originalSpeed * 0.05f;
             }
             else if (currentWorld == 1)
             {
@@ -69,6 +71,8 @@ public class ChangeWorld : MonoBehaviour
                 StartCoroutine(WarpTransition(0));
                 shaderTest.Matrixmode = false;
                 currentWorld = 0;
+                Player player = GetComponent<Player>();
+                player.speed = player.originalSpeed;
             }
 
             OnChangeWorld?.Invoke(currentWorld); //Invoke event
