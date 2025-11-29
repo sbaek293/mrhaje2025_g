@@ -25,8 +25,6 @@ public class Player : MonoBehaviour
     //public GameObject respawnMsg;
 
 
-
-
     [Header("Player Stats")]
     Vector3 curPos;
     private float t_adjustedSpeed;
