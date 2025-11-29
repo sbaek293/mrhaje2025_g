@@ -26,6 +26,8 @@ public class Weapon : MonoBehaviour
    
     public Player playerScript;
 
+    public int CanonCopyNum = 1;
+
     private int damage;
     private float fireRate;
     private float range;
@@ -182,6 +184,33 @@ public class Weapon : MonoBehaviour
                     t_newHole.transform.parent = t_hit.collider.gameObject.transform;
                     //Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
                     Destroy(t_newHole, 0.5f);
+                }
+
+                if (t_hit.transform.TryGetComponent<ObjectStates>(out ObjectStates objStates))
+                {
+                    if (loadout[currentIndex].name == "CopyCanon" && objStates.copyable)
+                    {
+                        GameObject copiedObj;
+                        float spawnRadius = 5f;
+
+                        for (int i = 0; i < CanonCopyNum; i++)
+                        {
+                            if (enemyFollow != null)
+                            {
+                                if (!TryGetComponent<AbilityScript>(out AbilityScript abilityScript)) Debug.LogWarning("Weapon : there are no AbilityScript on Player");
+                                copiedObj = Instantiate(t_hit.transform.gameObject, abilityScript.enemyContainer);
+                            }
+                            else
+                            {
+                                copiedObj = Instantiate(t_hit.transform.gameObject);
+                            }
+
+                            Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
+                            copiedObj.transform.position = t_hit.transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
+                        }
+
+                        Equip(0);
+                    }
                 }
             }
         }

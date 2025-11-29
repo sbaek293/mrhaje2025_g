@@ -113,6 +113,13 @@ public class AbilityScript : MonoBehaviour
             propertyManager.RemoveProperty(propertyManager.properties[0]);
             Invoke("resetMarionette", 120f);
         }
+        else if (propertyManager.properties[0].name == "Copy")
+        {
+            weaponScript.Equip(3);
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            propertyManager.RemoveProperty(propertyManager.properties[0]);
+            Invoke("resetCopy", 120f);
+        }
     }
 
     void resetJumpForce()
@@ -184,6 +191,12 @@ public class AbilityScript : MonoBehaviour
     }
 
     void resetMarionette()
+    {
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        abilityImage.sprite = null;
+    }
+
+    void resetCopy()
     {
         //propertyManager.RemoveProperty(propertyManager.properties[0]);
         abilityImage.sprite = null;

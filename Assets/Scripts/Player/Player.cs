@@ -327,14 +327,11 @@ public class Player : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Truck>() != null)
             {
-                Debug.LogWarning("Collide With truck");
                 if (collision.gameObject.GetComponent<EnemyPropertyManager>().HasPropertyName("Heavy") && collision.gameObject.GetComponent<EnemyPropertyManager>().HasPropertyName("Dash"))
                 {
-                    Debug.LogWarning("truck is heavy");
                     Vector3 forcedir = (transform.position - collision.gameObject.transform.position).normalized;
                     forcedir += Vector3.up;
                     stunned = true;
-                    Debug.LogWarning($"forcedir : {forcedir}");
                     rig.AddForce(forcedir * 10000, ForceMode.Force);
                 }
             }

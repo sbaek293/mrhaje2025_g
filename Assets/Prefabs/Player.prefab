@@ -573,6 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalSpeed: 200
+  speed: 0
   sprintModifier: 2.5
   jumpForce: 700
   max_health: 100
@@ -588,8 +589,6 @@ MonoBehaviour:
   ui_health: {fileID: 0}
   weapon: {fileID: 8492509272320255162}
   weaponParent: {fileID: 1541600524758887682}
-  loadout:
-  - {fileID: 11400000, guid: e0e725d3dae445f488f0fbdfadeb78e4, type: 2}
   normalCam: {fileID: 6162425749606664696}
   zoom: 0.7
   baseFOV: 0
@@ -604,7 +603,6 @@ MonoBehaviour:
   pauseScript: {fileID: 0}
   touchingWall: 0
   spawnPoint: {fileID: 0}
-  playerDecoy: {fileID: 0}
   jump: {fileID: 0}
   land: {fileID: 0}
   dmgTaken: {fileID: 0}
@@ -647,6 +645,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e0e725d3dae445f488f0fbdfadeb78e4, type: 2}
   - {fileID: 11400000, guid: 08155e249edb7414796adadf900a2382, type: 2}
   - {fileID: 11400000, guid: 080571aa68615ce4f9bcc50c36f5ec08, type: 2}
+  - {fileID: 11400000, guid: 12ea4915181ecdb43805b89312c7f798, type: 2}
   weaponParent: {fileID: 1541600524758887682}
   canBeShot:
     serializedVersion: 2
@@ -755,6 +754,7 @@ MonoBehaviour:
   propertyManager: {fileID: 0}
   playerScript: {fileID: 8961229792895477777}
   weaponScript: {fileID: 8492509272320255162}
+  enemyContainer: {fileID: 0}
   abilityImage: {fileID: 0}
   newMaterial: {fileID: 0}
   oldMaterial: {fileID: 0}

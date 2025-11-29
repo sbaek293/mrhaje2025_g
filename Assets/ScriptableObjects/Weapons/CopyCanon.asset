@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a25d21a380892d4384862484da0cf75, type: 3}
-  m_Name: Techniker
+  m_Name: CopyCanon
   m_EditorClassIdentifier: 
-  name: Techniker
-  damage: 400
-  firerate: 2
-  bloom: 300
-  recoil: 60
-  kickback: 0.4
-  aimSpeed: 5
-  prefab: {fileID: 3990202996555074594, guid: dedf971891ca5d94b868a65b5bf7211b, type: 3}
-  gunshotSound: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
-  pitchRandomization: 0.005
-  range: 45
+  name: CopyCanon
+  damage: 0
+  firerate: 1.5
+  bloom: 0
+  recoil: 20
+  kickback: 10
+  aimSpeed: 9
+  prefab: {fileID: 1968413400137487147, guid: de9cfe09e9eed3a46b15328f22bd2551, type: 3}
+  gunshotSound: {fileID: 8300000, guid: 6739c01659ad96d47987f4ddee226b36, type: 3}
+  pitchRandomization: 0.05
+  range: 100
   bulletHole: {fileID: 2359044884367751165, guid: b6c3b1461d57b024391587671666bf5d, type: 3}
   burst: 0
