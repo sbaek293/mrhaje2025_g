@@ -135,6 +135,20 @@ public class AbilityScript : MonoBehaviour
             abilityImage.sprite = propertyManager.properties[0].icon;
             Invoke("resetLavitating", 30f);
         }
+        else if (propertyManager.properties[0].name == "Shoot")
+        {
+            weaponScript.Equip(4);
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            propertyManager.RemoveProperty(propertyManager.properties[0]);
+            Invoke("resetShoot", 15f);
+        }
+        else if (propertyManager.properties[0].name == "Fire")
+        {
+            weaponScript.Equip(5);
+            abilityImage.sprite = propertyManager.properties[0].icon;
+            propertyManager.RemoveProperty(propertyManager.properties[0]);
+            Invoke("resetFire", 15f);
+        }
     }
 
     void resetJumpForce()
@@ -229,6 +243,20 @@ public class AbilityScript : MonoBehaviour
     {
         //propertyManager.RemoveProperty(propertyManager.properties[0]);
         playerScript.lavitating = false;
+        abilityImage.sprite = null;
+    }
+
+    void resetShoot()
+    {
+        weaponScript.Equip(0);
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
+        abilityImage.sprite = null;
+    }
+
+    void resetFire()
+    {
+        weaponScript.Equip(0);
+        //propertyManager.RemoveProperty(propertyManager.properties[0]);
         abilityImage.sprite = null;
     }
 }

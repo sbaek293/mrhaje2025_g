@@ -649,6 +649,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08155e249edb7414796adadf900a2382, type: 2}
   - {fileID: 11400000, guid: 080571aa68615ce4f9bcc50c36f5ec08, type: 2}
   - {fileID: 11400000, guid: 12ea4915181ecdb43805b89312c7f798, type: 2}
+  - {fileID: 11400000, guid: 06de118c3bcb1b84fa7a8778ecd583a1, type: 2}
+  - {fileID: 11400000, guid: 0d44c44769f712b4db976ea0be09db4b, type: 2}
   weaponParent: {fileID: 1541600524758887682}
   canBeShot:
     serializedVersion: 2

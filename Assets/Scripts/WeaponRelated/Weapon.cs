@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.ProBuilder;
@@ -123,9 +124,9 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
-        
-        if (muzzleFlash == null)
+        if (muzzleFlash == null) {
             muzzleFlash = gameObject.transform.Find("Weapon/" + currentWeapon.name + "/Anchor/Design/Barrel/Particle System").GetComponent<ParticleSystem>();
+        }
         muzzleFlash.Play();
 
         Transform t_spawn = transform.Find("Main Camera");
@@ -212,17 +213,47 @@ public class Weapon : MonoBehaviour
                     }
                 }
             }
+        //projectile
         } else if (loadout[currentIndex].weaponType == WeaponType.Projectile)
         {
             GameObject temp_proj = Instantiate(loadout[currentIndex].projectilePrefab, t_spawn.position, Quaternion.identity);
             Rigidbody rb = temp_proj.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * loadout[currentIndex].attackForceForward, ForceMode.Impulse);
-            rb.AddForce(transform.up * loadout[currentIndex].attackForceUp, ForceMode.Impulse);
-            rb.AddForce(t_bloom * loadout[currentIndex].attackForceUp, ForceMode.Impulse);
+
+            Debug.LogWarning($"플레이어가 바라보는 방향 : {transform.forward}");
+
+            Vector3 attackForce = t_bloom * loadout[currentIndex].attackForceForward + t_spawn.up * loadout[currentIndex].attackForceUp;
+
+            //rb.AddForce(worldDir * attackForce.magnitude, ForceMode.Impulse);
+            temp_proj.transform.rotation = Quaternion.LookRotation(attackForce);
+
+            rb.AddForce(attackForce, ForceMode.Impulse);
         }
+        //area
         else if (loadout[currentIndex].weaponType == WeaponType.Area)
         {
+            Transform overlabArea = gameObject.transform.Find("Weapon/" + currentWeapon.name + "/Anchor/Design/Barrel/OverlabArea");
 
+            if (overlabArea.TryGetComponent<CheckArea>(out CheckArea checkArea))
+            {
+                foreach (Collider enemyCol in checkArea.GetInsideObjects())
+                {
+                    if (enemyCol == null) continue;
+
+                    if (enemyCol.TryGetComponent<EnemyHealth>(out EnemyHealth T)) { 
+                        if (enemyCol.TryGetComponent<EnemyFollowAI>(out EnemyFollowAI enemyFollow))
+                        {
+                            if (!enemyFollow.is_friend)
+                            {
+                                T.TakeDamage(loadout[currentIndex].areaDamage);
+                            }
+                        }
+                        else
+                        {
+                            T.TakeDamage(loadout[currentIndex].areaDamage);
+                        }
+                    }
+                }
+            }
         }
 
         //sound
