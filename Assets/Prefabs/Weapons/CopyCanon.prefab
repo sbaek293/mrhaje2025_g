@@ -5203,7 +5203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 4
-  smooth: 4
+  smooth: 5
 --- !u!1 &2663649372327856584
 GameObject:
   m_ObjectHideFlags: 0

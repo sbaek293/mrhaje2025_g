@@ -29,10 +29,9 @@ public class Projectile : MonoBehaviour
         //Debug.LogWarning($"other.collider.gameObject.layer : {other.collider.gameObject.layer}");
         if (((1 << other.collider.gameObject.layer) & destroyLayer) != 0)
         {
-            //Debug.LogWarning("Projectile이 Destroyable에 부딫혀 삭제됨");
             Destroy(gameObject);
         }
-        else if (!is_friendly && other.collider.gameObject.CompareTag("Player"))
+        else if (!is_friendly && other.collider.gameObject.CompareTag("Player") && gameObject.layer == 11)
         {
             other.gameObject.GetComponent<Player>().TakeDamage(damage, false, 0);
             Destroy(gameObject);
@@ -41,13 +40,29 @@ public class Projectile : MonoBehaviour
         {
             if (other.gameObject.GetComponent<EnemyFollowAI>() == null)
             {
-                Debug.LogWarning($"AI is null : {other.gameObject}");
-                return;
-            }
-            if (is_friendly ^ other.gameObject.GetComponent<EnemyFollowAI>().is_friend)
+                if (gameObject.layer == 12)
+                {
+                    other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
+                    Destroy(gameObject);
+                }
+            } else
             {
-                other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
-                Destroy(gameObject);
+                if (gameObject.layer == 12)
+                {
+                    if (!other.gameObject.GetComponent<EnemyFollowAI>().is_friend)
+                    {
+                        other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
+                        Destroy(gameObject);
+                    }
+                } 
+                else if (gameObject.layer == 11)
+                {
+                    if (is_friendly ^ other.gameObject.GetComponent<EnemyFollowAI>().is_friend)
+                    {
+                        other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
+                        Destroy(gameObject);
+                    }
+                }
             }
         }
     }

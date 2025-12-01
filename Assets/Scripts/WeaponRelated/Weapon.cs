@@ -1,6 +1,8 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
-using System.Collections;
+using UnityEngine.ProBuilder;
 
 public class Weapon : MonoBehaviour
 {
@@ -50,43 +52,37 @@ public class Weapon : MonoBehaviour
 
         if (currentWeapon != null)
         {
-           
-                if (currentIndex == 0)
+            Aim(Input.GetMouseButton(1));
+
+            if (currentCooldown <= 0)
+            {
+                if (loadout[currentIndex].burst == 1)
                 {
-                    Aim(Input.GetMouseButton(1));
-                    
-                   
-                        if (Input.GetMouseButtonDown(0) && currentCooldown <= 0 && loadout[currentIndex].burst != 1)
-                        {
-                            Shoot();
-                        }
-                         
-                   
-                }else
-                {
-                    Aim(Input.GetMouseButton(1));
-                        if (Input.GetMouseButton(0) && currentCooldown <= 0 )
-                        {
-                            Shoot();
-                        }
+                    if (Input.GetMouseButton(0))
+                    {
+                        Shoot();
+                    }
                 }
+                else
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Shoot();
+                    }
+                }
+            }
         }
 
-            //weapon position
-            currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.fixedDeltaTime * 4f);
-
-
-        }
+        //weapon position
+        currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.fixedDeltaTime * 4f);
+    }
 
     
 
     void FixedUpdate()
     {
-   
         //cooldown
         if (currentCooldown > 0) currentCooldown -= Time.fixedDeltaTime;
-       
-    
     }
 
     public void Equip(int p_ind)
@@ -128,9 +124,9 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
-        
-        if (muzzleFlash == null)
+        if (muzzleFlash == null) {
             muzzleFlash = gameObject.transform.Find("Weapon/" + currentWeapon.name + "/Anchor/Design/Barrel/Particle System").GetComponent<ParticleSystem>();
+        }
         muzzleFlash.Play();
 
         Transform t_spawn = transform.Find("Main Camera");
@@ -144,72 +140,117 @@ public class Weapon : MonoBehaviour
         t_bloom.Normalize();
 
         //cooldown
-
         currentCooldown = fireRate;
 
 
         //raycast
-        RaycastHit t_hit = new RaycastHit();
-
-        if (Physics.Raycast(t_spawn.position, t_bloom, out t_hit, range, canBeShot))
+        if (loadout[currentIndex].weaponType == WeaponType.RayCast)
         {
-            GameObject t_newHole = Instantiate(loadout[currentIndex].bulletHole, t_hit.point + t_hit.normal * 0.001f, Quaternion.identity) as GameObject;
-            t_newHole.transform.LookAt(t_hit.point + t_hit.normal);
+            RaycastHit t_hit = new RaycastHit();
 
-            Destroy(t_newHole, 2.5f);
-
-            if (t_hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth T))
+            if (Physics.Raycast(t_spawn.position, t_bloom, out t_hit, range, canBeShot))
             {
-                if (t_hit.transform.TryGetComponent<EnemyFollowAI>(out EnemyFollowAI enemyFollow))
+                GameObject t_newHole = Instantiate(loadout[currentIndex].bulletHole, t_hit.point + t_hit.normal * 0.001f, Quaternion.identity) as GameObject;
+                t_newHole.transform.LookAt(t_hit.point + t_hit.normal);
+
+                Destroy(t_newHole, 2.5f);
+
+                if (t_hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth T))
                 {
-                    if (!enemyFollow.is_friend) {
-                        T.TakeDamage(damage);
-                    }
-
-                    t_newHole.transform.parent = t_hit.collider.gameObject.transform;
-                    //Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
-                    Destroy(t_newHole, 0.5f);
-
-                    if (loadout[currentIndex].name == "Marionette")
+                    if (t_hit.transform.TryGetComponent<EnemyFollowAI>(out EnemyFollowAI enemyFollow))
                     {
-                        enemyFollow.BeMarionette();
-                        GameObject marionetteSign = Instantiate(transform.GetComponent<AbilityScript>().marionettePrefab, t_hit.transform);
-                        marionetteSign.transform.localPosition = new Vector3(0, 1, 0);
-
-                        Equip(0);
-                    }
-                } else
-                {
-                    T.TakeDamage(damage);
-                    t_newHole.transform.parent = t_hit.collider.gameObject.transform;
-                    //Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
-                    Destroy(t_newHole, 0.5f);
-                }
-
-                if (t_hit.transform.TryGetComponent<ObjectStates>(out ObjectStates objStates))
-                {
-                    if (loadout[currentIndex].name == "CopyCanon" && objStates.copyable)
-                    {
-                        GameObject copiedObj;
-                        float spawnRadius = 5f;
-
-                        for (int i = 0; i < CanonCopyNum; i++)
+                        if (!enemyFollow.is_friend)
                         {
-                            if (enemyFollow != null)
-                            {
-                                if (!TryGetComponent<AbilityScript>(out AbilityScript abilityScript)) Debug.LogWarning("Weapon : there are no AbilityScript on Player");
-                                copiedObj = Instantiate(t_hit.transform.gameObject, abilityScript.enemyContainer);
-                            }
-                            else
-                            {
-                                copiedObj = Instantiate(t_hit.transform.gameObject);
-                            }
-
-                            Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
-                            copiedObj.transform.position = t_hit.transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
+                            T.TakeDamage(damage);
                         }
 
-                        Equip(0);
+                        t_newHole.transform.parent = t_hit.collider.gameObject.transform;
+                        //Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
+                        Destroy(t_newHole, 0.5f);
+
+                        if (loadout[currentIndex].name == "Marionette")
+                        {
+                            enemyFollow.BeMarionette();
+                            GameObject marionetteSign = Instantiate(transform.GetComponent<AbilityScript>().marionettePrefab, t_hit.transform);
+                            marionetteSign.transform.localPosition = new Vector3(0, 1, 0);
+
+                            Equip(0);
+                        }
+                    }
+                    else
+                    {
+                        T.TakeDamage(damage);
+                        t_newHole.transform.parent = t_hit.collider.gameObject.transform;
+                        //Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
+                        Destroy(t_newHole, 0.5f);
+                    }
+
+                    if (t_hit.transform.TryGetComponent<ObjectStates>(out ObjectStates objStates))
+                    {
+                        if (loadout[currentIndex].name == "CopyCanon" && objStates.copyable)
+                        {
+                            GameObject copiedObj;
+                            float spawnRadius = 5f;
+
+                            for (int i = 0; i < CanonCopyNum; i++)
+                            {
+                                if (enemyFollow != null)
+                                {
+                                    if (!TryGetComponent<AbilityScript>(out AbilityScript abilityScript)) Debug.LogWarning("Weapon : there are no AbilityScript on Player");
+                                    copiedObj = Instantiate(t_hit.transform.gameObject, abilityScript.enemyContainer);
+                                }
+                                else
+                                {
+                                    copiedObj = Instantiate(t_hit.transform.gameObject);
+                                }
+
+                                Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
+                                copiedObj.transform.position = t_hit.transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
+                            }
+
+                            Equip(0);
+                        }
+                    }
+                }
+            }
+        //projectile
+        } else if (loadout[currentIndex].weaponType == WeaponType.Projectile)
+        {
+            GameObject temp_proj = Instantiate(loadout[currentIndex].projectilePrefab, t_spawn.position, Quaternion.identity);
+            Rigidbody rb = temp_proj.GetComponent<Rigidbody>();
+
+            Debug.LogWarning($"플레이어가 바라보는 방향 : {transform.forward}");
+
+            Vector3 attackForce = t_bloom * loadout[currentIndex].attackForceForward + t_spawn.up * loadout[currentIndex].attackForceUp;
+
+            //rb.AddForce(worldDir * attackForce.magnitude, ForceMode.Impulse);
+            temp_proj.transform.rotation = Quaternion.LookRotation(attackForce);
+
+            rb.AddForce(attackForce, ForceMode.Impulse);
+        }
+        //area
+        else if (loadout[currentIndex].weaponType == WeaponType.Area)
+        {
+            Transform overlabArea = gameObject.transform.Find("Weapon/" + currentWeapon.name + "/Anchor/Design/Barrel/OverlabArea");
+
+            if (overlabArea.TryGetComponent<CheckArea>(out CheckArea checkArea))
+            {
+                foreach (Collider enemyCol in checkArea.GetInsideObjects())
+                {
+                    if (enemyCol == null) continue;
+
+                    if (enemyCol.TryGetComponent<EnemyHealth>(out EnemyHealth T)) { 
+                        if (enemyCol.TryGetComponent<EnemyFollowAI>(out EnemyFollowAI enemyFollow))
+                        {
+                            if (!enemyFollow.is_friend)
+                            {
+                                T.TakeDamage(loadout[currentIndex].areaDamage);
+                            }
+                        }
+                        else
+                        {
+                            T.TakeDamage(loadout[currentIndex].areaDamage);
+                        }
                     }
                 }
             }
@@ -220,7 +261,7 @@ public class Weapon : MonoBehaviour
         //sfx.clip = loadout[currentIndex].gunshotSound;
         //sfx.pitch = 1 - loadout[currentIndex].pitchRandomization + Random.Range(-loadout[currentIndex].pitchRandomization, loadout[currentIndex].pitchRandomization);
         //sfx.Play();
-            
+
         //gun fx
         currentWeapon.transform.Rotate(-loadout[currentIndex].recoil, 0, 0);
     }
