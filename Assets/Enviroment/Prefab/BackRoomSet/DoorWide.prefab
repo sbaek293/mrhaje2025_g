@@ -473,6 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1386373937020482920}
+  - component: {fileID: 1070095371777738058}
   m_Layer: 0
   m_Name: DoorWide
   m_TagString: Untagged
@@ -496,3 +497,20 @@ Transform:
   - {fileID: 679974530748508427}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1070095371777738058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933804649957123783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 059747e43be363e40aaa05a975466bb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: ab4bc07173afc374593ba61d55991e20, type: 3}
+  DoorLocked: 0
+  Hinges:
+  - {fileID: 6287153113392141313}
+  - {fileID: 728223565063905306}

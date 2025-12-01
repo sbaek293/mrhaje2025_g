@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 2599045243985447191}
   - component: {fileID: 5684711033882406567}
   - component: {fileID: 2934677687879194303}
+  - component: {fileID: 5232313580568240041}
   m_Layer: 0
   m_Name: Beam_1.001
   m_TagString: Untagged
@@ -118,3 +119,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5232313580568240041
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7090027001051635549}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.26, y: 0.26, z: 2.01}
+  m_Center: {x: 0, y: -0.12756482, z: 0}
