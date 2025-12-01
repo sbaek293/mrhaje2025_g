@@ -10,7 +10,7 @@ public class PropertyManager : MonoBehaviour
         if (propData == null) { Debug.LogError("AddProperty: propData is NULL"); return; }
         if (properties == null) properties = new System.Collections.Generic.List<PropertyDatas>();
 
-        propData.duration = propData.maxDuration;
+        propData.leftDuration = propData.maxDuration;
 
         properties.Add(propData);
     }

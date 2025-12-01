@@ -22,6 +22,9 @@ public class AbilityScript : MonoBehaviour
 
     public float blinkDistance=10;
 
+    public PropertyDatas currentUsingProperty;
+    public GameObject currentTimer;
+
     [Header("Objects")]
     public GameObject shieldPrefab;
     public AudioClip hornSound;
@@ -43,6 +46,16 @@ public class AbilityScript : MonoBehaviour
         {
             if (!GetComponent<ChangeWorld>().inCodeWorld()) Ability();
         }
+
+        if (currentUsingProperty.useLimitType == UseLimitType.Time)
+        {
+            currentUsingProperty.leftDuration = currentTimer.GetComponent<CircularTimer>().remainingTime;
+
+            if (currentUsingProperty.leftDuration <= 0f)
+            {
+                Invoke("reset"+ currentUsingProperty.propertyName, 0f);
+            }
+        }
     }
     public void FixedUpdate()
     {
@@ -56,27 +69,23 @@ public class AbilityScript : MonoBehaviour
             org_jump = playerScript.jumpForce;
             abilityImage.sprite = propertyManager.properties[0].icon;
             playerScript.jumpForce += 700f;
-            Invoke("resetJumpForce", 3f);
         }
         else if (propertyManager.properties[0].name == "Blue")
         {
             org_speed = playerScript.originalSpeed;
             abilityImage.sprite = propertyManager.properties[0].icon;
             playerScript.originalSpeed += 100;
-            Invoke("resetSpeed", 3f);
         }
         else if (propertyManager.properties[0].name == "Red")
         {
             playerScript.col.sharedMaterial = newMaterial;
             abilityImage.sprite = propertyManager.properties[0].icon;
-            Invoke("resetRed", 3f);
         }
         else if (propertyManager.properties[0].name == "Dash")
         {
             playerScript.movementType = "truck";
             playerScript.normalCam.fieldOfView = playerScript.baseFOV * 1.3f;
             abilityImage.sprite = propertyManager.properties[0].icon;
-            Invoke("resetDash", 10f);
         }
         else if (propertyManager.properties[0].name == "Heavy")
         {
@@ -84,25 +93,21 @@ public class AbilityScript : MonoBehaviour
             playerScript.rig.mass = playerScript.originalWeight * 5;
             playerScript.originalSpeed *= 0.5f;
             abilityImage.sprite = propertyManager.properties[0].icon;
-            Invoke("resetHeavy", 10f);
         }
         else if (propertyManager.properties[0].name == "Horn")
         {
             AudioManager.PlaySound(gameObject, hornSound, false, 10, 0.1f);
             abilityImage.sprite = propertyManager.properties[0].icon;
-            Invoke("resetHorn", 0.25f);
         }
         else if (propertyManager.properties[0].name == "Shield")
         {
             GameObject shield = Instantiate(shieldPrefab, transform);
             abilityImage.sprite = propertyManager.properties[0].icon;
-            Invoke("resetShield", 20f);
         }
         else if (propertyManager.properties[0].name == "Automatic")
         {
             weaponScript.Equip(1);
             abilityImage.sprite = propertyManager.properties[0].icon;
-            Invoke("resetAuto", 7f);
         }
         else if (propertyManager.properties[0].name == "Blink")
         {
@@ -113,14 +118,12 @@ public class AbilityScript : MonoBehaviour
             if (dir.magnitude == 0) dir = new Vector3(0, 0, 1);
             Vector3 diff = dir * blinkDistance;
             transform.position = transform.position + transform.TransformDirection(diff);
-            Invoke("resetBlink", 3f);
         }
         else if (propertyManager.properties[0].name == "Hardening")
         {
             playerScript.hardening = true;
             org_speed = playerScript.originalSpeed;
             playerScript.originalSpeed *= 0.2f;
-            Invoke("resetHardening", 3f);
         }
         else if (propertyManager.properties[0].name == "Decoy")
         {
@@ -128,48 +131,41 @@ public class AbilityScript : MonoBehaviour
             temp_decop.transform.position = transform.position;
             abilityImage.sprite = propertyManager.properties[0].icon;
             propertyManager.RemoveProperty(propertyManager.properties[0]);
-            Invoke("resetDecoy", 10f);
         }
         else if (propertyManager.properties[0].name == "Marionette")
         {
             weaponScript.Equip(2);
             abilityImage.sprite = propertyManager.properties[0].icon;
             propertyManager.RemoveProperty(propertyManager.properties[0]);
-            Invoke("resetMarionette", 120f);
         }
         else if (propertyManager.properties[0].name == "Copy")
         {
             weaponScript.Equip(3);
             abilityImage.sprite = propertyManager.properties[0].icon;
             propertyManager.RemoveProperty(propertyManager.properties[0]);
-            Invoke("resetCopy", 120f);
         }
         else if (propertyManager.properties[0].name == "Bouncy")
         {
             GetComponent<CapsuleCollider>().material = bouncyMaterial;
             playerScript.rig.mass = playerScript.originalWeight * 0.75f;
             abilityImage.sprite = propertyManager.properties[0].icon;
-            Invoke("resetBouncy", 60f);
         }
         else if (propertyManager.properties[0].name == "Lavitating")
         {
             playerScript.lavitating = true;
             abilityImage.sprite = propertyManager.properties[0].icon;
-            Invoke("resetLavitating", 30f);
         }
         else if (propertyManager.properties[0].name == "Shoot")
         {
             weaponScript.Equip(4);
             abilityImage.sprite = propertyManager.properties[0].icon;
             propertyManager.RemoveProperty(propertyManager.properties[0]);
-            Invoke("resetShoot", 15f);
         }
         else if (propertyManager.properties[0].name == "Fire")
         {
             weaponScript.Equip(5);
             abilityImage.sprite = propertyManager.properties[0].icon;
             propertyManager.RemoveProperty(propertyManager.properties[0]);
-            Invoke("resetFire", 15f);
         }
     }
 

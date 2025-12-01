@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,10 @@ public class AutoTargetHaking : MonoBehaviour
     public bool matchCameraRotation = false;
     public float iconPlacedRadius = 32;
     public float blankBetweenNode = 0.01f;
+
+    [Header("Hack Token UI")]
+    public GameObject hackTokenUI;
+    public int hackTokenNum = 0;
 
     [Header("Refs")]
     public Camera mainCamera;
@@ -50,6 +55,7 @@ public class AutoTargetHaking : MonoBehaviour
         if (!canvas) canvas = GetComponentInParent<Canvas>();
 
         screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
+        hackTokenUI.transform.Find("Number").GetComponent<TMPro.TMP_Text>().text = hackTokenNum.ToString();
     }
 
     void LateUpdate()
@@ -221,9 +227,14 @@ public class AutoTargetHaking : MonoBehaviour
             {
                 if (propertyUIContainer != null)
                 {
-                    PropertyDatas stolenProperty = propertyUIContainer.transform.GetChild(selectedNodeIndex).GetComponent<EnemyPropertyUINodeInterect>().StealProperty();
-                    PlayerPropertyManager propManager = player.GetComponent<PlayerPropertyManager>();
-                    propManager.AddProperty(stolenProperty);
+                    if (hackTokenNum > 0) // use hackToken for steel property
+                    {
+                        PropertyDatas stolenProperty = propertyUIContainer.transform.GetChild(selectedNodeIndex).GetComponent<EnemyPropertyUINodeInterect>().StealProperty();
+                        PlayerPropertyManager propManager = player.GetComponent<PlayerPropertyManager>();
+                        propManager.AddProperty(stolenProperty);
+                        addHackToken(-1);
+                    }
+                    
                     player.GetComponent<ChangeWorld>().changeWorldFunc();
                 }
             }
@@ -337,5 +348,11 @@ public class AutoTargetHaking : MonoBehaviour
         }
 
         propertyUIContainer = null;
+    }
+
+    public void addHackToken(int number)
+    {
+        hackTokenNum += number;
+        hackTokenUI.transform.Find("Number").GetComponent<TMPro.TMP_Text>().text = hackTokenNum.ToString();
     }
 }

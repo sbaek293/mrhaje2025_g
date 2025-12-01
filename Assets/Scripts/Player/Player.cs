@@ -232,7 +232,7 @@ public class Player : MonoBehaviour
 
 
         //Movement
-        if ((isGrounded || lavitating) && !touchingWall && !stunned)
+        if ((isGrounded || lavitating) && !stunned)
         {
             if (movementType == "normal")
             {

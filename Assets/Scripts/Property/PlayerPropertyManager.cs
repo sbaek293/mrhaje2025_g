@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using TMPro;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class PlayerPropertyManager : PropertyManager
 {
@@ -26,9 +27,9 @@ public class PlayerPropertyManager : PropertyManager
             PropertyDatas prop = properties[i];
             if (prop == null) continue;
 
-            prop.duration = propTimers[i].GetComponent<CircularTimer>().remainingTime;
+            prop.leftDuration = propTimers[i].GetComponent<CircularTimer>().remainingTime;
 
-            if (prop.duration <= 0f)
+            if (prop.leftDuration <= 0f)
             {
                 RemoveProperty(prop);
             }
@@ -92,5 +93,20 @@ public class PlayerPropertyManager : PropertyManager
             newTimer.GetComponentInChildren<Text>().text = prop.propertyName;
             propTimers.Add(newTimer);
         }
+    }
+
+    public void UseProperty()
+    {
+        GameObject newTimer = Instantiate(propertyItemPrefab, GetComponent<AbilityScript>().abilityImage.transform);
+        //set name and image
+        string displayName = properties[0].propertyName;
+        TMP_Text tmp = newTimer.GetComponentInChildren<TMP_Text>(true);
+        tmp.text = displayName;
+
+        Sprite icon = properties[0].icon;
+        Image img = newTimer.GetComponentsInChildren<Image>(true)[1];
+        img.sprite = icon;
+
+        RemoveProperty(properties[0]);
     }
 }
