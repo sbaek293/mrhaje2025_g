@@ -23,6 +23,7 @@ MonoBehaviour:
   pitchRandomization: 0.1
   burst: 1
   weaponType: 2
+  attackType: 1
   damage: 5
   range: 20
   bulletHole: {fileID: 2359044884367751165, guid: b6c3b1461d57b024391587671666bf5d, type: 3}

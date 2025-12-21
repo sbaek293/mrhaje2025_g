@@ -10,7 +10,11 @@ public enum WeaponType
     Projectile,
     Area
 }
-
+public enum AttackType
+{
+    Normal,
+    Fire
+}
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon")]
 public class WeaponStats : ScriptableObject
 {
@@ -27,7 +31,7 @@ public class WeaponStats : ScriptableObject
     public int burst;
 
     public WeaponType weaponType;
-
+    public AttackType attackType;
 
     [Header("RayCast")]
     public int damage;

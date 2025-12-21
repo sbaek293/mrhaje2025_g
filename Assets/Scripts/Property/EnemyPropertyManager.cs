@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class EnemyPropertyManager : PropertyManager
 {
+    
     void Awake()
     {
 
@@ -13,9 +14,16 @@ public class EnemyPropertyManager : PropertyManager
     {
         
     }
-
+    GameObject effect;
     public override void RemoveProperty(PropertyDatas propData)
     {
+        if (!effect)
+        {
+            effect = Instantiate(Resources.Load<GameObject>("PropertyEffect/HackingEffect"), transform);
+            effect.transform.localPosition = new Vector3(0, 0, 0);
+        }
+        effect.GetComponent<ParticleSystem>().Play();
+
         base.RemoveProperty(propData);
 
         if (propData.name == "Dash")

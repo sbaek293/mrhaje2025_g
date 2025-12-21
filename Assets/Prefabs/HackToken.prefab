@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4669404627396313319}
   - component: {fileID: 5709892929067705041}
   - component: {fileID: 8506152803340093494}
-  - component: {fileID: 1995988632470571611}
   - component: {fileID: 3451317365535908137}
   m_Layer: 0
   m_Name: Quad (1)
@@ -92,28 +91,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1995988632470571611
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018999322926488121}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!222 &3451317365535908137
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -241,7 +218,6 @@ GameObject:
   - component: {fileID: 561633319427882157}
   - component: {fileID: 328663965126082931}
   - component: {fileID: 6218879441729379159}
-  - component: {fileID: 4613186762497642945}
   - component: {fileID: 4181761179888993556}
   m_Layer: 0
   m_Name: Quad
@@ -322,28 +298,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4613186762497642945
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2340981207326062840}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!222 &4181761179888993556
 CanvasRenderer:
   m_ObjectHideFlags: 0
