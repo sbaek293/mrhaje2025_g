@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: c5c6f5135c7a403448abb0a5dbc13e9d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - meshrenderer: {instanceID: 0}
+  - BurnMat: {fileID: 2100000, guid: da50ff57fd89afd4a93dca302b809bbd, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

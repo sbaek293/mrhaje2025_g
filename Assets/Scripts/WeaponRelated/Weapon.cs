@@ -25,7 +25,8 @@ public class Weapon : MonoBehaviour
     private float orgBloom;
 
     private float slowValue;
-   
+
+    private AttackType attackType = AttackType.Normal;
     public Player playerScript;
 
     public int CanonCopyNum = 1;
@@ -95,6 +96,7 @@ public class Weapon : MonoBehaviour
         damage = loadout[currentIndex].damage;
         range = loadout[currentIndex].range;
         orgBloom = loadout[currentIndex].bloom;
+        attackType = loadout[currentIndex].attackType;
 
         GameObject t_newWeapon = Instantiate(loadout[p_ind].prefab, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject;
         t_newWeapon.transform.localPosition = Vector3.zero;
@@ -161,7 +163,7 @@ public class Weapon : MonoBehaviour
                     {
                         if (!enemyFollow.is_friend)
                         {
-                            T.TakeDamage(damage);
+                            T.TakeDamage(damage, attackType);
                         }
 
                         t_newHole.transform.parent = t_hit.collider.gameObject.transform;
@@ -179,7 +181,7 @@ public class Weapon : MonoBehaviour
                     }
                     else
                     {
-                        T.TakeDamage(damage);
+                        T.TakeDamage(damage, attackType);
                         t_newHole.transform.parent = t_hit.collider.gameObject.transform;
                         //Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
                         Destroy(t_newHole, 0.5f);
@@ -244,12 +246,12 @@ public class Weapon : MonoBehaviour
                         {
                             if (!enemyFollow.is_friend)
                             {
-                                T.TakeDamage(loadout[currentIndex].areaDamage);
+                                T.TakeDamage(loadout[currentIndex].areaDamage, attackType);
                             }
                         }
                         else
                         {
-                            T.TakeDamage(loadout[currentIndex].areaDamage);
+                            T.TakeDamage(loadout[currentIndex].areaDamage, attackType);
                         }
                     }
                 }
