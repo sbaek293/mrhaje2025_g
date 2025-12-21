@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyName: Automatic
   description: 
-  maxDuration: 10
-  duration: 0
   icon: {fileID: 21300000, guid: 887a65d6df70db941b8e38860137c513, type: 3}
+  useLimitType: 0
+  abilityScript: {fileID: 11400000, guid: 005492dca82a4a24694839202d43f684, type: 2}
+  maxDuration: 10
+  maxNum: 0

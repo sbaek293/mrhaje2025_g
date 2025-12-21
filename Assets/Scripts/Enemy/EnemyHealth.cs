@@ -25,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
         renderer.enabled = true;
         Invoke("changeMaterial", 1f);
 
-        if(GetComponent<EnemyPropertyManager>().HasPropertyName("Hardening")) currentHealth -= (int)(amount*0.2f);
+        if(GetComponent<PropertyManager>().HasPropertyName("Hardening")) currentHealth -= (int)(amount*0.2f);
         else currentHealth -= amount;
 
         if (currentHealth <= 0)

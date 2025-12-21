@@ -117,7 +117,7 @@ public class AutoTargetHaking : MonoBehaviour
 
             ClearTargetUI();
 
-            if (closestEnemy != null && closestEnemy.GetComponent<EnemyPropertyManager>() != null)
+            if (closestEnemy != null && closestEnemy.GetComponent<PropertyManager>() != null)
             {
                 GameObject targetUIInstance = Instantiate(autoTargetPrefab, autoTargetUIContainer.transform);
                 UIFollowTarget uiFollowTarget = targetUIInstance.GetComponentInChildren<UIFollowTarget>();
@@ -132,7 +132,7 @@ public class AutoTargetHaking : MonoBehaviour
         else
         {
             //check what is selected node
-            EnemyPropertyManager propertyManager = fixedTarget.GetComponent<EnemyPropertyManager>();
+            PropertyManager propertyManager = fixedTarget.GetComponent<PropertyManager>();
 
             if (propertyManager.properties.Count > 0)
             {
@@ -293,7 +293,7 @@ public class AutoTargetHaking : MonoBehaviour
             uIFollowTarget.target = uiPivotPoint3D.transform;
 
 
-            EnemyPropertyManager propertyManager = fixedTarget.GetComponent<EnemyPropertyManager>();
+            PropertyManager propertyManager = fixedTarget.GetComponent<PropertyManager>();
             for (int i = 0; i < propertyManager.properties.Count; i++)
             {
                 PropertyDatas prop = propertyManager.GetPropertyByIndex(i);

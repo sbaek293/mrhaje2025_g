@@ -431,7 +431,6 @@ GameObject:
   - component: {fileID: 5531868032012347872}
   - component: {fileID: 5083486558193423442}
   - component: {fileID: 4364563900743112101}
-  - component: {fileID: 5931604676491082651}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -663,6 +662,7 @@ MonoBehaviour:
   currentIndex: 0
   playerScript: {fileID: 8961229792895477777}
   CanonCopyNum: 1
+  marionettePrefab: {fileID: 0}
   muzzleFlash: {fileID: 0}
 --- !u!114 &4276371079233385056
 MonoBehaviour:
@@ -677,8 +677,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   properties: []
-  propertyItemPrefab: {fileID: 5743964923682669481, guid: dc4b5c1bf0ba6414da4490d6e9c3574f, type: 3}
+  propertyItemPrefab: {fileID: 5743964923682669481, guid: ecb04514ad3915e43ab8b860323688e4, type: 3}
   propertiesContainer: {fileID: 0}
+  usedPropertyContainer: {fileID: 0}
+  propertyTimerPrefab: {fileID: 5743964923682669481, guid: dc4b5c1bf0ba6414da4490d6e9c3574f, type: 3}
+  propertyCounterPrefab: {fileID: 5743964923682669481, guid: ba4e02daff28a6a489fdee5b8e93bcef, type: 3}
   maxPropertySlotNum: 2
 --- !u!114 &5701874381155054624
 MonoBehaviour:
@@ -748,29 +751,3 @@ MonoBehaviour:
   v: {fileID: 1587788896283755596}
   l: {fileID: 0}
   shaderTest: {fileID: 5531868032012347872}
---- !u!114 &5931604676491082651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7481567867750123350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63fc91ae52c22244dba2c1f78661f9ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  propertyManager: {fileID: 0}
-  playerScript: {fileID: 8961229792895477777}
-  weaponScript: {fileID: 8492509272320255162}
-  enemyContainer: {fileID: 0}
-  abilityImage: {fileID: 0}
-  newMaterial: {fileID: 0}
-  oldMaterial: {fileID: 0}
-  blinkDistance: 10
-  shieldPrefab: {fileID: 6968334685882507671, guid: 2309860cbc1466d438804d301642d8b8, type: 3}
-  hornSound: {fileID: 8300000, guid: f46cc5add35647148b880069d8aff744, type: 3}
-  playerDecoyPrefab: {fileID: 7849319359021052013, guid: 46e2c686e163e6c46af619b7a13836f8, type: 3}
-  marionettePrefab: {fileID: 2989810529613765013, guid: aa1ad2478cec6c64baed104fcf933052, type: 3}
-  playerMaterial: {fileID: 13400000, guid: ab81a49ce32c4764aaa61c670ea99999, type: 2}
-  bouncyMaterial: {fileID: 13400000, guid: 1ec959eecafeb1d4aa60a58f5a9705a0, type: 2}

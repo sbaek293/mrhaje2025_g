@@ -3,6 +3,7 @@ using TMPro;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class PlayerPropertyManager : PropertyManager
 {
@@ -11,31 +12,42 @@ public class PlayerPropertyManager : PropertyManager
     public GameObject propertyItemPrefab;
     public Transform propertiesContainer;
 
-    public int maxPropertySlotNum = 2;
+    public Transform usedPropertyContainer;
+    public GameObject propertyTimerPrefab;
+    public GameObject propertyCounterPrefab;
 
-    private List<GameObject> propTimers = new List<GameObject>();
+    public int maxPropertySlotNum = 2;
+    
+    private List<GameObject> propIcons = new List<GameObject>();
+
+    private PropertyDatas currentUsedAbility = null;
+    private GameObject propTimer = null;
+    private GameObject propCounter = null;
+    private float leftDuration = 0f;
+    private int leftNumber = 0;
+
+    private Player playerScript;
 
     private void Start()
     {
         RefreshUI();
+
+        playerScript = GetComponent<Player>();
     }
 
     void Update()
     {
-        for (int i = properties.Count - 1; i >= 0; i--)
+        if (currentUsedAbility == null) return;
+
+        if (currentUsedAbility.useLimitType == UseLimitType.Time)
         {
-            PropertyDatas prop = properties[i];
-            if (prop == null) continue;
+            leftDuration = propTimer.GetComponent<CircularTimer>().remainingTime;
 
-            prop.leftDuration = propTimers[i].GetComponent<CircularTimer>().remainingTime;
-
-            if (prop.leftDuration <= 0f)
+            if (leftDuration <= 0f)
             {
-                RemoveProperty(prop);
-            }
-            else
-            {
-                
+                Destroy(propTimer);
+                propTimer = null;
+                EndCurrentProperty();
             }
         }
     }
@@ -53,60 +65,119 @@ public class PlayerPropertyManager : PropertyManager
         if (propertyItemPrefab == null) { Debug.LogError("AddProperty: propertyItemPrefab not assigned"); return; }
         if (propertiesContainer == null) { Debug.LogError("AddProperty: propertiesContainer not assigned"); return; }
 
-        GameObject newTimer = Instantiate(propertyItemPrefab, propertiesContainer);
-        newTimer.GetComponent<CircularTimer>().StartTimer(propData.maxDuration);
+        GameObject newIcon = Instantiate(propertyItemPrefab, propertiesContainer);
 
         //set name and image
         string displayName = propData.propertyName;
-        TMP_Text tmp = newTimer.GetComponentInChildren<TMP_Text>(true);
+        TMP_Text tmp = newIcon.GetComponentInChildren<TMP_Text>(true);
         tmp.text = displayName;
         
         Sprite icon = propData.icon;
-        Image img = newTimer.GetComponentsInChildren<Image>(true)[1];
+        Image img = newIcon.GetComponentsInChildren<Image>(true)[1];
         img.sprite = icon;
 
-        propTimers.Add(newTimer);
+        propIcons.Add(newIcon);
     }
 
     public override void RemoveProperty(PropertyDatas propData)
     {
         int i = properties.IndexOf(propData);
-        Destroy(propTimers[i]);
-        propTimers.RemoveAt(i);
+        Destroy(propIcons[i]);
+        propIcons.RemoveAt(i);
 
         base.RemoveProperty(propData);        
     }
 
-
     private void RefreshUI()
     {
-        foreach (var item in propTimers)
+        foreach (var item in propIcons)
         {
             Destroy(item);
         }
-        propTimers.Clear();
-
-        for (int i = 0; i < properties.Count; i++)
-        {
-            PropertyDatas prop = properties[i];
-            GameObject newTimer = Instantiate(propertyItemPrefab, propertiesContainer);
-            newTimer.GetComponentInChildren<Text>().text = prop.propertyName;
-            propTimers.Add(newTimer);
-        }
+        propIcons.Clear();
     }
 
     public void UseProperty()
     {
-        GameObject newTimer = Instantiate(propertyItemPrefab, GetComponent<AbilityScript>().abilityImage.transform);
-        //set name and image
-        string displayName = properties[0].propertyName;
-        TMP_Text tmp = newTimer.GetComponentInChildren<TMP_Text>(true);
-        tmp.text = displayName;
+        if (currentUsedAbility == null) { 
+            if (properties.Count > 0)
+            {
+                currentUsedAbility = properties[0];
 
-        Sprite icon = properties[0].icon;
-        Image img = newTimer.GetComponentsInChildren<Image>(true)[1];
-        img.sprite = icon;
+                if (currentUsedAbility.useLimitType == UseLimitType.Number)
+                {
+                    leftNumber = currentUsedAbility.maxNum;
 
-        RemoveProperty(properties[0]);
+                    propCounter = Instantiate(propertyCounterPrefab, usedPropertyContainer);
+                    //set name and image
+                    string displayName = currentUsedAbility.propertyName;
+                    TMP_Text tmp = propCounter.transform.Find("name").GetComponent<TMP_Text>();
+                    tmp.text = displayName;
+
+                    Sprite icon = currentUsedAbility.icon;
+                    Image img = propCounter.GetComponentsInChildren<Image>(true)[1];
+                    img.sprite = icon;
+
+                    TMP_Text countTmp = propCounter.transform.Find("Count").GetComponent<TMP_Text>();
+                    countTmp.text = leftNumber.ToString();
+                }
+                else if (currentUsedAbility.useLimitType == UseLimitType.Time)
+                {
+                    propTimer = Instantiate(propertyTimerPrefab, usedPropertyContainer);
+                    //set name and image
+                    string displayName = currentUsedAbility.propertyName;
+                    TMP_Text tmp = propTimer.GetComponentInChildren<TMP_Text>(true);
+                    tmp.text = displayName;
+
+                    Sprite icon = currentUsedAbility.icon;
+                    Image img = propTimer.GetComponentsInChildren<Image>(true)[1];
+                    img.sprite = icon;
+
+                    CircularTimer timer = propTimer.GetComponent<CircularTimer>();
+                    timer.StartTimer(currentUsedAbility.maxDuration);
+                }
+
+                currentUsedAbility.abilityScript.StartAbility(playerScript);
+                RemoveProperty(properties[0]);
+            }
+        }
+        else
+        {
+            currentUsedAbility.abilityScript.UseAbility(playerScript);
+        }
+    }
+
+    public void EndCurrentProperty()
+    {
+        if (currentUsedAbility == null) return;
+
+        currentUsedAbility.abilityScript.EndAbility(playerScript);
+
+        currentUsedAbility = null;
+        propTimer = null;
+        propCounter = null;
+        leftDuration = 0f;
+        leftNumber = 0;
+    }
+
+
+    public void countUseNumber()
+    {
+        if (currentUsedAbility == null) return;
+
+        if (currentUsedAbility.useLimitType == UseLimitType.Number)
+        {
+            leftNumber -= 1;
+
+            TMP_Text countTmp = propCounter.transform.Find("Count").GetComponent<TMP_Text>();
+            countTmp.text = leftNumber.ToString();
+
+            if (leftNumber <= 0)
+            {
+                Destroy(propCounter);
+                propCounter = null;
+                EndCurrentProperty();
+            }
+        }
     }
 }

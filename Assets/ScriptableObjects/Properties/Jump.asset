@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyName: Jump
   description: 
-  maxDuration: 10000
-  duration: 0
   icon: {fileID: 21300000, guid: 3ac2c78ad424a564bbcca8c9ab72ed82, type: 3}
+  useLimitType: 0
+  abilityScript: {fileID: 11400000, guid: a451ba53fe71ea54cbdef0f1975e2373, type: 2}
+  maxDuration: 60
+  maxNum: 0

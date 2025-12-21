@@ -25,7 +25,7 @@ public class RayToClickEnemy : MonoBehaviour
                 GameObject hitObject = hitInfo.collider.gameObject;
                 //Debug.Log($"Hit object: {hitObject.name}, layer: {hitObject.layer}", hitObject);
 
-                EnemyPropertyManager enemyScript = hitObject.GetComponent<EnemyPropertyManager>();
+                PropertyManager enemyScript = hitObject.GetComponent<PropertyManager>();
                 if (enemyScript != null)
                 {
                     Debug.Log($"Calling SpawnProperty on: {hitObject.name}");

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyName: Lavitating
   description: Fly like a balloon
-  maxDuration: 60
-  duration: 0
   icon: {fileID: 21300000, guid: 42dcb585b95d4774abfb42585213c8d2, type: 3}
+  useLimitType: 0
+  abilityScript: {fileID: 11400000, guid: 83907bb576ef2a6419f379061b865e67, type: 2}
+  maxDuration: 30
+  maxNum: 0

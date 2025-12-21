@@ -29,6 +29,7 @@ public class Weapon : MonoBehaviour
     public Player playerScript;
 
     public int CanonCopyNum = 1;
+    public GameObject marionettePrefab;
 
     private int damage;
     private float fireRate;
@@ -171,10 +172,10 @@ public class Weapon : MonoBehaviour
                         if (loadout[currentIndex].name == "Marionette")
                         {
                             enemyFollow.BeMarionette();
-                            GameObject marionetteSign = Instantiate(transform.GetComponent<AbilityScript>().marionettePrefab, t_hit.transform);
+                            GameObject marionetteSign = Instantiate(marionettePrefab, t_hit.transform);
                             marionetteSign.transform.localPosition = new Vector3(0, 1, 0);
 
-                            Equip(0);
+                            GetComponent<PlayerPropertyManager>().countUseNumber();
                         }
                     }
                     else
@@ -189,15 +190,18 @@ public class Weapon : MonoBehaviour
                     {
                         if (loadout[currentIndex].name == "CopyCanon" && objStates.copyable)
                         {
-                            GameObject copiedObj;
+                            GameObject copiedObj = null;
                             float spawnRadius = 5f;
 
                             for (int i = 0; i < CanonCopyNum; i++)
                             {
                                 if (enemyFollow != null)
                                 {
-                                    if (!TryGetComponent<AbilityScript>(out AbilityScript abilityScript)) Debug.LogWarning("Weapon : there are no AbilityScript on Player");
-                                    copiedObj = Instantiate(t_hit.transform.gameObject, abilityScript.enemyContainer);
+                                    Transform enemyContainer = GameObject.Find("EnemyContainer").transform;
+
+                                    if (enemyContainer != null) {
+                                        copiedObj = Instantiate(t_hit.transform.gameObject, enemyContainer);
+                                    }
                                 }
                                 else
                                 {
@@ -208,7 +212,7 @@ public class Weapon : MonoBehaviour
                                 copiedObj.transform.position = t_hit.transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
                             }
 
-                            Equip(0);
+                            GetComponent<PlayerPropertyManager>().countUseNumber();
                         }
                     }
                 }
@@ -219,7 +223,7 @@ public class Weapon : MonoBehaviour
             GameObject temp_proj = Instantiate(loadout[currentIndex].projectilePrefab, t_spawn.position, Quaternion.identity);
             Rigidbody rb = temp_proj.GetComponent<Rigidbody>();
 
-            Debug.LogWarning($"플레이어가 바라보는 방향 : {transform.forward}");
+            //Debug.LogWarning($"플레이어가 바라보는 방향 : {transform.forward}");
 
             Vector3 attackForce = t_bloom * loadout[currentIndex].attackForceForward + t_spawn.up * loadout[currentIndex].attackForceUp;
 

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyName: Red
   description: It is red like a rose
-  maxDuration: 60
-  duration: 0
   icon: {fileID: 21300000, guid: b3e3c2e199cbb0d42886fa2cb3d20a80, type: 3}
+  useLimitType: 0
+  abilityScript: {fileID: 11400000, guid: eb82690d6cc34e24b9b2cc12afa4ec90, type: 2}
+  maxDuration: 10
+  maxNum: 0

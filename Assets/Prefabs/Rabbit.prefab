@@ -229,9 +229,9 @@ GameObject:
   - component: {fileID: 8493469707036405829}
   - component: {fileID: 4019464352851485323}
   - component: {fileID: 7547629548244919391}
-  - component: {fileID: 3518148564210700113}
   - component: {fileID: 3530353610618674235}
   - component: {fileID: 6579657790291165465}
+  - component: {fileID: -7052952000053354018}
   m_Layer: 6
   m_Name: Rabbit
   m_TagString: Untagged
@@ -347,20 +347,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   - {fileID: 2100000, guid: f591e4aea7741c54783948f327f08fa5, type: 2}
   damageTextPrefab: {fileID: 0}
---- !u!114 &3518148564210700113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9033537802351445999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d75512f1a0821484ea68edda3c01b6e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  properties:
-  - {fileID: 11400000, guid: e5b395776c8b8f1408604c4205bdf67a, type: 2}
 --- !u!54 &3530353610618674235
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -401,5 +387,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3530353610618674235}
+  sphereCollider: {fileID: 0}
   jumpForce: 200
-  propertyManager: {fileID: 3518148564210700113}
+  propertyManager: {fileID: 0}
+--- !u!114 &-7052952000053354018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9033537802351445999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b2262fa7143f941be3075945c61c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  properties:
+  - {fileID: 11400000, guid: e5b395776c8b8f1408604c4205bdf67a, type: 2}
+  - {fileID: 11400000, guid: ef0efa23d44a2aa43bdceb497b778c2b, type: 2}

@@ -9,9 +9,23 @@ public class Rabbit : MonoBehaviour
     public SphereCollider sphereCollider;
     public float jumpForce = 200f;
     public PropertyManager propertyManager;
-    void Start()
+
+
+    private void OnEnable()
     {
-        
+        if (propertyManager != null) {
+            propertyManager.OnAddProperty += HandleAddProperty;
+            propertyManager.OnRemoveProperty += HandleRemoveProperty;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (propertyManager != null)
+        {
+            propertyManager.OnAddProperty -= HandleAddProperty;
+            propertyManager.OnRemoveProperty -= HandleRemoveProperty;
+        }
     }
 
     // Update is called once per frame
@@ -22,8 +36,24 @@ public class Rabbit : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce);
             jumpCD = 5f;
         }
+    }
 
-        if(propertyManager.properties.Count == 0)
+    private void FixedUpdate()
+    {
+         if (jumpCD > 0) jumpCD -= Time.fixedDeltaTime;
+    }
+
+    private void HandleAddProperty(PropertyDatas propData)
+    {
+        if (propData.propertyName == "Jump")
+        {
+            jumpForce = 200f;
+        }
+    }
+
+    private void HandleRemoveProperty(PropertyDatas propData)
+    {
+        if (propData.propertyName == "Jump")
         {
             jumpForce = 0f;
 
@@ -32,10 +62,5 @@ public class Rabbit : MonoBehaviour
                 sphereCollider.sharedMaterial = null;
             }
         }
-    }
-
-    private void FixedUpdate()
-    {
-         if (jumpCD > 0) jumpCD -= Time.fixedDeltaTime;
     }
 }

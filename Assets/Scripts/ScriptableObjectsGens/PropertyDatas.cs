@@ -16,11 +16,11 @@ public class PropertyDatas : ScriptableObject
 
     public UseLimitType useLimitType;
 
+    public AbilityScript abilityScript;
+
     [Header("Time")]
     public float maxDuration;
-    public float leftDuration;
 
     [Header("Number")]
     public int maxNum;
-    public int leftNum;
 }

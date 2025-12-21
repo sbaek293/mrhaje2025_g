@@ -215,6 +215,7 @@ public class EnemyFollowAI : MonoBehaviour
 
     public void BeMarionette()
     {
+        agent.enabled = true;
         is_friend = true;
         disabled = false;
     }

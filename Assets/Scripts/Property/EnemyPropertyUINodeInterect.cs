@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyPropertyUINodeInterect : MonoBehaviour
 {
     public PropertyDatas prop;
-    public EnemyPropertyManager owner;
+    public PropertyManager owner;
 
     private Vector3 originalScale;
 

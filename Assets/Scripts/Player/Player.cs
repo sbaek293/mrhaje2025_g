@@ -128,8 +128,11 @@ public class Player : MonoBehaviour
         bool sprint = Input.GetKey(KeyCode.LeftControl);
         bool jump = Input.GetKeyDown(KeyCode.Space);
         bool pause = Input.GetKeyDown("j");
-        
 
+        if (Input.GetKeyDown("e"))
+        {
+            if (!GetComponent<ChangeWorld>().inCodeWorld()) GetComponent<PlayerPropertyManager>().UseProperty();
+        }
 
 
         //States
@@ -338,7 +341,7 @@ public class Player : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Truck>() != null)
             {
-                if (collision.gameObject.GetComponent<EnemyPropertyManager>().HasPropertyName("Heavy") && collision.gameObject.GetComponent<EnemyPropertyManager>().HasPropertyName("Dash"))
+                if (collision.gameObject.GetComponent<PropertyManager>().HasPropertyName("Heavy") && collision.gameObject.GetComponent<PropertyManager>().HasPropertyName("Dash"))
                 {
                     Vector3 forcedir = (transform.position - collision.gameObject.transform.position).normalized;
                     forcedir += Vector3.up;

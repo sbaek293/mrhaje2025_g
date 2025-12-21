@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AbilityScript : MonoBehaviour
+public class OldAbilityScript : MonoBehaviour
 {
     [Header("References")]
     public PropertyManager propertyManager;
@@ -33,33 +33,6 @@ public class AbilityScript : MonoBehaviour
     public PhysicsMaterial playerMaterial;
     public PhysicsMaterial bouncyMaterial;
 
-
-
-
-    public void Start()
-    {
-
-    }
-    public void Update()
-    {
-        if (Input.GetKeyDown("e"))
-        {
-            if (!GetComponent<ChangeWorld>().inCodeWorld()) Ability();
-        }
-
-        if (currentUsingProperty.useLimitType == UseLimitType.Time)
-        {
-            currentUsingProperty.leftDuration = currentTimer.GetComponent<CircularTimer>().remainingTime;
-
-            if (currentUsingProperty.leftDuration <= 0f)
-            {
-                Invoke("reset"+ currentUsingProperty.propertyName, 0f);
-            }
-        }
-    }
-    public void FixedUpdate()
-    {
-    }
 
     public void Ability()
     {

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyName: Shield
   description: Save your health
-  maxDuration: 300
-  duration: 280.4375
   icon: {fileID: 21300000, guid: d1077eac4170da645a77af68d8b75223, type: 3}
+  useLimitType: 0
+  abilityScript: {fileID: 11400000, guid: 5da25110eac539947811ef97ffa25274, type: 2}
+  maxDuration: 120
+  maxNum: 0

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyName: Marionette
   description: Control enemy to attack themselves
-  maxDuration: 300
-  duration: 228.77122
   icon: {fileID: 21300000, guid: c3e5083ad2907c84eb9d465daebff27c, type: 3}
+  useLimitType: 1
+  abilityScript: {fileID: 11400000, guid: d6c0b9e0310b89e45ade54db18f83ed6, type: 2}
+  maxDuration: 0
+  maxNum: 1
