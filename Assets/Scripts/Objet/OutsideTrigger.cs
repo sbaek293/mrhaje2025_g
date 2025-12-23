@@ -7,6 +7,7 @@ public class OutsideTrigger : MonoBehaviour
 {
     [Header("Target")]
     public GameObject targetObject;
+    public GameObject camera;
 
     private bool used = false;
 
@@ -19,6 +20,7 @@ public class OutsideTrigger : MonoBehaviour
             used = true;
 
             StartTruck();
+            camera.GetComponent<AutoTargetHaking>().maxTargetingDistence = 30f;
         }
     }
 
