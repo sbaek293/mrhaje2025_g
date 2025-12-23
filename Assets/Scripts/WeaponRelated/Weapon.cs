@@ -187,35 +187,36 @@ public class Weapon : MonoBehaviour
                         //Stamina.Instance.Recover(Stamina.StaminaEventType.AttackHit);
                         Destroy(t_newHole, 0.5f);
                     }
+                }
 
-                    if (t_hit.transform.TryGetComponent<ObjectStates>(out ObjectStates objStates))
+
+                if (t_hit.transform.TryGetComponent<ObjectStates>(out ObjectStates objStates))
+                {
+                    if (loadout[currentIndex].name == "CopyCanon" && objStates.copyable)
                     {
-                        if (loadout[currentIndex].name == "CopyCanon" && objStates.copyable)
+                        GameObject copiedObj = null;
+                        float spawnRadius = 5f;
+
+                        for (int i = 0; i < CanonCopyNum; i++)
                         {
-                            GameObject copiedObj = null;
-                            float spawnRadius = 5f;
-
-                            for (int i = 0; i < CanonCopyNum; i++)
+                            if (t_hit.transform.TryGetComponent<EnemyFollowAI>(out EnemyFollowAI enemyFollow))
                             {
-                                if (enemyFollow != null)
-                                {
-                                    Transform enemyContainer = GameObject.Find("EnemyContainer").transform;
+                                Transform enemyContainer = GameObject.Find("EnemyContainer").transform;
 
-                                    if (enemyContainer != null) {
-                                        copiedObj = Instantiate(t_hit.transform.gameObject, enemyContainer);
-                                    }
+                                if (enemyContainer != null) {
+                                    copiedObj = Instantiate(t_hit.transform.gameObject, enemyContainer);
                                 }
-                                else
-                                {
-                                    copiedObj = Instantiate(t_hit.transform.gameObject);
-                                }
-
-                                Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
-                                copiedObj.transform.position = t_hit.transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
+                            }
+                            else
+                            {
+                                copiedObj = Instantiate(t_hit.transform.gameObject);
                             }
 
-                            GetComponent<PlayerPropertyManager>().countUseNumber();
+                            Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
+                            copiedObj.transform.position = t_hit.transform.position + new Vector3(randomCircle.x, 0, randomCircle.y);
                         }
+
+                        GetComponent<PlayerPropertyManager>().countUseNumber();
                     }
                 }
             }

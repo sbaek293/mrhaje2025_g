@@ -151048,6 +151048,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6940369909782122913, guid: 9137ca85c767c9241a1e7058574d634d, type: 3}
+      propertyPath: copyable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8337541783094216406, guid: 9137ca85c767c9241a1e7058574d634d, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -172039,7 +172043,7 @@ PrefabInstance:
       objectReference: {fileID: 795814791}
     - target: {fileID: 3467514255953773381, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: hackTokenNum
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3467514255953773381, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: enemyContainer
@@ -172074,9 +172078,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1858611077}
     - target: {fileID: 4276371079233385056, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: properties.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4276371079233385056, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: usedPropertyContainer
       value: 
       objectReference: {fileID: 991488641}
+    - target: {fileID: 4276371079233385056, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
+      propertyPath: 'properties.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c00346b6aaf51e459fa2c16a76d2c82, type: 2}
     - target: {fileID: 5701874381155054624, guid: 19ca0eeaf65bbab4bbfbf22a18fec2ff, type: 3}
       propertyPath: staminaBar
       value: 
