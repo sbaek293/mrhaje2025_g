@@ -30,4 +30,4 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   attackForceForward: 0
   attackForceUp: 0
-  areaDamage: 1
+  areaDamage: 8

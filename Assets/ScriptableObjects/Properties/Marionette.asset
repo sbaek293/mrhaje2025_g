@@ -18,4 +18,4 @@ MonoBehaviour:
   useLimitType: 1
   abilityScript: {fileID: 11400000, guid: d6c0b9e0310b89e45ade54db18f83ed6, type: 2}
   maxDuration: 0
-  maxNum: 1
+  maxNum: 2

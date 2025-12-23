@@ -298,7 +298,7 @@ public class Player : MonoBehaviour
         float t_health_ratio = current_health / (float)max_health;
 
         ui_healthbar.fillAmount = Mathf.Lerp(ui_healthbar.fillAmount, t_health_ratio, Time.fixedDeltaTime * 8f);
-        ui_health.text = "" + Mathf.Round(current_health / 10);
+        ui_health.text = "" + Mathf.Round(current_health);
     }
 
     void RefreshCD()

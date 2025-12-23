@@ -34,6 +34,7 @@ public class AutoTargetHaking : MonoBehaviour
     public bool occlusionCheck = false;
     public LayerMask occlusionMask;
     public float meanNodeSelectDistence = 20;
+    public float maxTargetingDistence = 6f;
 
     private Vector2 screenCenter;
     private Transform currentAutoTarget;
@@ -60,6 +61,8 @@ public class AutoTargetHaking : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!player.GetComponent<ChangeWorld>().inCodeWorld()) ClearTargetUI();
+
         if (mainCamera == null || canvas == null || !player.GetComponent<ChangeWorld>().inCodeWorld()) return;
 
         if (fixedTarget == null)
@@ -117,8 +120,9 @@ public class AutoTargetHaking : MonoBehaviour
 
             ClearTargetUI();
 
-            if (closestEnemy != null && closestEnemy.GetComponent<PropertyManager>() != null)
+            if (closestEnemy != null && (closestEnemy.position - transform.position).magnitude <= maxTargetingDistence && closestEnemy.GetComponent<PropertyManager>() != null)
             {
+                //set new target
                 GameObject targetUIInstance = Instantiate(autoTargetPrefab, autoTargetUIContainer.transform);
                 UIFollowTarget uiFollowTarget = targetUIInstance.GetComponentInChildren<UIFollowTarget>();
                 uiFollowTarget.target = closestEnemy;
@@ -249,11 +253,9 @@ public class AutoTargetHaking : MonoBehaviour
 
     void ClearTargetUI()
     {
-        if (!isTargetUIExist) return;
-
         foreach (Transform ui in autoTargetUIContainer)
         {
-            Destroy(ui.gameObject);
+            if (ui != null) Destroy(ui.gameObject);
         }
         currentAutoTarget = null;
         currentTargetDistance = detectRange + 1;
@@ -262,7 +264,7 @@ public class AutoTargetHaking : MonoBehaviour
 
     void HandleChangeWorld(int _currentWorld)
     {
-        if (propertyUIContainer != null && _currentWorld == 0)
+        if (propertyUIContainer != null)
         {
             ClearPropertyUI();
             ClearTargetUI();
@@ -354,5 +356,12 @@ public class AutoTargetHaking : MonoBehaviour
     {
         hackTokenNum += number;
         hackTokenUI.transform.Find("Number").GetComponent<TMPro.TMP_Text>().text = hackTokenNum.ToString();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Draw range spheres
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, maxTargetingDistence);
     }
 }

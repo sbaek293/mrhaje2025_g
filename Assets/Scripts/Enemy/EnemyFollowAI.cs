@@ -52,9 +52,9 @@ public class EnemyFollowAI : MonoBehaviour
         playerInSightRange = IsPlayerInFOV(sightRange);
         playerInAttackRange = IsPlayerInFOV(attackRange);
 
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        if (target == null && !playerInAttackRange) Patroling();
+        if (target != null && !playerInAttackRange) ChasePlayer();
+        if (playerInAttackRange && target != null) AttackPlayer();
     }
 
     private bool IsPlayerInFOV(float range)
@@ -90,7 +90,7 @@ public class EnemyFollowAI : MonoBehaviour
             }
         }
 
-        target = null;
+        //target = null;
         return false;
     }
 
@@ -218,6 +218,11 @@ public class EnemyFollowAI : MonoBehaviour
         agent.enabled = true;
         is_friend = true;
         disabled = false;
+    }
+
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
     }
 
 }

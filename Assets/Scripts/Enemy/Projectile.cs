@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour
             {
                 if (gameObject.layer == 12)
                 {
-                    other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
+                    if(other.gameObject.GetComponent<EnemyHealth>() != null) other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
                     Destroy(gameObject);
                 }
             } else
@@ -51,7 +51,7 @@ public class Projectile : MonoBehaviour
                 {
                     if (!other.gameObject.GetComponent<EnemyFollowAI>().is_friend)
                     {
-                        other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
+                        if (other.gameObject.GetComponent<EnemyHealth>() != null) other.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
                         Destroy(gameObject);
                     }
                 } 

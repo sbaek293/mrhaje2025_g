@@ -9,6 +9,8 @@ public class Truck : MonoBehaviour
     public LayerMask ground;
     public bool touchingWall = false;
 
+    public float collideForce = 50;
+
     [Header("Forward Movement")]
     public float maxSpeed = 20f; 
     public float acceleration = 50f;
@@ -19,6 +21,8 @@ public class Truck : MonoBehaviour
     public Vector3 savedAngularVelocity;
     public bool savedUseGravity;
     public bool savedKinematic;
+
+    private bool collided = false;
 
     void OnEnable() => ChangeWorld.OnChangeWorld += HandleChangeWorld;
     void OnDisable() => ChangeWorld.OnChangeWorld -= HandleChangeWorld;
@@ -32,9 +36,9 @@ public class Truck : MonoBehaviour
     {
         if (paused) return;
 
-        bool isGrounded = true;//Physics.Raycast(groundDetector.position, Vector3.down, 0.2f, ground);
+        bool isGrounded = Physics.Raycast(groundDetector.position, Vector3.down, 0.2f, ground);
 
-        if (isGrounded || !touchingWall)
+        if (isGrounded && !touchingWall && !collided)
         {
             if (propertyManager.HasPropertyName("Dash"))
             {
@@ -52,7 +56,7 @@ public class Truck : MonoBehaviour
             }
         } else
         {
-            Debug.LogWarning("It is not on Ground!");
+            Debug.LogWarning("Truck : It is not on Ground!");
         }
     }
 
@@ -96,10 +100,17 @@ public class Truck : MonoBehaviour
                 Debug.LogWarning($"Collide with Player");
                 if (!propertyManager.HasPropertyName("Heavy"))
                 {
+                    collided = true;
                     Vector3 forcedir = (transform.position - collision.gameObject.transform.position).normalized;
-                    forcedir += Vector3.up;
+                    forcedir += transform.up;
+
+                    rig.linearVelocity = forcedir * 5;
+                    rig.angularVelocity = Vector3.zero;
+                    rig.mass = 0.1f;
+                    transform.position = transform.position + forcedir * 0.3f;
+
                     Debug.LogWarning($"Truck : forcedir : {forcedir}");
-                    rig.AddForce(forcedir * 500, ForceMode.Force);
+                    rig.AddForce(forcedir * collideForce, ForceMode.Force);
                     //AddForceForTime(rig, 100000 * forcedir, 0.25f);
                 }
             }

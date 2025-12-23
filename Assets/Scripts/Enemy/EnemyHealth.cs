@@ -22,7 +22,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int amount, AttackType attackType = AttackType.Normal)
+    public virtual void TakeDamage(int amount, AttackType attackType = AttackType.Normal)
     {
 
         //GameObject DamageText = Instantiate(damageTextPrefab, transform);
@@ -70,7 +70,7 @@ public class EnemyHealth : MonoBehaviour
     {
         GetComponent<MeshRenderer>().material = materials[0];
     }
-    void Death()
+    public virtual void Death()
     {
         
         // Death function

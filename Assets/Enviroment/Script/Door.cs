@@ -22,7 +22,7 @@ public class Door : MonoBehaviour
         DoorLocked = Unlock;
         for (int i = 0; i < Hinges.Length; i++)
         {
-            Hinges[i].isKinematic = DoorLocked;
+            if (Hinges[i] != null) Hinges[i].isKinematic = DoorLocked;
         }
     }
 }

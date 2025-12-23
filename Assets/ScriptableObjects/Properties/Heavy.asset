@@ -17,5 +17,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 728a6819342629b44a78c8bae0adb7fd, type: 3}
   useLimitType: 0
   abilityScript: {fileID: 11400000, guid: f4406292ed395c84ba223c43bfbb8868, type: 2}
-  maxDuration: 20
+  maxDuration: 5
   maxNum: 0
